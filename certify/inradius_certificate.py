@@ -172,7 +172,7 @@ def verify(big_r, slits, eps, cells, pars):
     assert area == 1, f"leaves do not have the area of the root square (got {area})"
     for (lv, ix, iy, code, kind, j), par in zip(cells.tolist(), pars.tolist()):
         shift = SCALE_BITS + 3 - lv  # cell size = 8 / 2^lv = 2^(3 - lv)
-        assert shift >= 0 and 0 <= ix < (1 << lv) and 0 <= iy < (1 << lv), "cell outside the root square"
+        assert lv >= 6 and shift >= 0 and 0 <= ix < (1 << lv) and 0 <= iy < (1 << lv), "cell outside the root square"
         x0, y0 = ix << shift, iy << shift
         x1, y1 = x0 + (1 << shift), y0 + (1 << shift)
         if code == 0:

@@ -61,8 +61,8 @@ One cut helps, but pushing it too close to the centre backfires: the particle hi
 |---|---|---|
 | 1935 | 6 straight cuts at two depths | 0.658 |
 | 1945–1985 | more straight cuts | 0.65647, then 0.6564155 |
-| 2009 | cuts that fork like a tree | 0.6563937 |
-| 2010 | a larger tree (numerical value only) | 0.656319277 |
+| 2009 | 6 straight cuts plus 6 specially curved ones | 0.6563937 |
+| 2010 | the same idea with more curved cuts (numerical value only) | 0.656319277 |
 | here | 24 cuts, 18 of them curved, found by computer search | 0.65628589 |
 
 ## 4. Measuring ρ: the heat picture

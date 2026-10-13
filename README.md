@@ -10,9 +10,9 @@ for the univalent Bloch–Landau constant U. For comparison:
 
 | | Upper bound for U | Nature |
 |---|---|---|
-| Carroll and Ortega-Cerdà (2009) | 0.6563937 | proved (closed formula) |
+| Carroll and Ortega-Cerdà (2009) | 0.6563937 | proved (explicit formula, evaluated numerically) |
 | Ortega-Cerdà and Pridhnani (2010) | 0.656319277 | numerical, no error analysis |
-| **This repository** | **0.65628589** | computer-assisted proof |
+| **This repository** | **0.65628589** | computer-assisted proof, not yet refereed |
 
 ![The domain](domain_G.png)
 

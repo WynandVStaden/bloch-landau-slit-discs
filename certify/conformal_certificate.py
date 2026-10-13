@@ -36,7 +36,9 @@ Gauss-Chebyshev sum plus a remainder bounded in the same way (analyticity of
 the kernel in the integration variable on a rectangle, verified by branch-and-bound).
 
 All trusted computations use Arb (python-flint). Floating point is used only to
-choose parameters (ellipse sizes, numbers of nodes) and to produce the c_{j,n}.
+choose parameters (ellipse sizes, numbers of nodes), to guide the branch and bound, and to
+produce the c_{j,n}. Enclosures are passed between processes as a double-precision midpoint
+and an upward-rounded radius, which is exact.
 
 Usage: python conformal_certificate.py [design, default G] [n, default 64] [processes, default 8]
 """
@@ -154,12 +156,6 @@ def bound_abs(func, box, scale, ratio=4.0, min_width=1e-7, max_boxes=400000):
     return lo_all, hi_all
 
 
-def log_sup(bounds):
-    """sup |log |F|| from (lower, upper) bounds of |F|."""
-    lo, hi = bounds
-    return max(up(abs(lo.log())), up(abs(hi.log())))
-
-
 def rho_of(b):
     return b + math.sqrt(1 + b * b)
 
@@ -196,11 +192,34 @@ def float_distance(geo, i, j, x_range):
     return float(np.hypot(d.real, im).min())
 
 
+def ellipse(b):
+    """For a rectangle half-height b (a double): a half-width a_half and an ellipse parameter r (doubles) with
+    E_r contained in [-a_half, a_half] x [-b, b]. The inclusion is verified in ball arithmetic."""
+    a_half = math.sqrt(1 + b * b) * (1 + 1e-12)
+    r = rho_of(b) * (1 - 1e-12)
+    ra = arb(r)
+    assert ra > 1 and (ra + 1 / ra) / 2 < arb(a_half) and (ra - 1 / ra) / 2 < arb(b), "ellipse not inside the rectangle"
+    return a_half, r
+
+
+def log_sup(bounds):
+    """An Arb upper bound for sup |log |F|| from Arb (lower, upper) bounds of |F|."""
+    lo, hi = bounds
+    return abs(lo.log()).max(abs(hi.log()))
+
+
 def plan(geo, coef, log=print):
-    """Choose rectangles and node counts, and prove the kernel bounds they need. Returns a plain-data plan."""
+    """Choose rectangles and node counts, and prove the kernel bounds they need.
+
+    Floating point is used only to CHOOSE b, the node counts M and N and the boxes of the branch and bound.
+    Every bound (psi_sup, A, B, the interpolation remainder, the quadrature remainders) is computed in ball
+    arithmetic; it is converted to a double, rounded upwards, only when it is handed to the worker processes.
+    """
+    for vals in coef.values():
+        assert all(v == 0.0 for v in vals[0::2]), "the density polynomials must be odd"
     deg = max(n for c in coef.values() for n, v in enumerate(c) if v != 0.0)
-    psi_sup = {c: sum(abs(v) for v in vals) for c, vals in coef.items()}  # sup |psi| on [-1, 1], exact enough: inflated below
-    psi_sup = {c: v * (1 + 1e-12) for c, v in psi_sup.items()}
+    psi_sup = {c: sum((abs(arb(v)) for v in vals), arb(0)) for c, vals in coef.items()}  # >= sup |psi| on [-1, 1]
+    pi = arb.pi()
     out = {}
     for i in geo.reps:
         t0 = time.time()
@@ -209,10 +228,10 @@ def plan(geo, coef, log=print):
         dist = min([float_distance(geo, i, j, (-1, 1)) for j in others] + [9.0])
         b = min(0.3, SAFETY * dist / geo.speed[i])
         while True:
-            a_half = math.sqrt(1 + b * b) * (1 + 1e-12)
+            a_half, r = ellipse(b)
             box = [(-a_half, a_half), (-b, b), (-1.0, 1.0), (0.0, 0.0)]
             scale = [geo.speed[i], geo.speed[i], 1.0, 0.0]
-            big_b, ok = 0.0, True
+            big_b, ok = arb(0), True
             for j in [i] + others:
                 func = (lambda x, y, j=j: geo.self_kernel(i, x, y)) if j == i else (lambda x, y, j=j: geo.cross(i, j, x, y))
                 scale[2] = geo.speed[j]
@@ -220,19 +239,23 @@ def plan(geo, coef, log=print):
                 if bd is None:
                     ok = False
                     break
-                big_b += math.pi * psi_sup[geo.cls[j]] * log_sup(bd)
+                big_b += pi * psi_sup[geo.cls[j]] * log_sup(bd)
             if ok:
                 break
             b /= 2
-        rho = rho_of(b) * (1 - 1e-12)
-        lam = [math.pi * math.log(2)] + [math.pi / n for n in range(1, max(len(c) for c in coef.values()) + 1)]
-        big_b += geo.fa[i] * (1 + 1e-12) * a_half
-        big_b += sum(abs(v) * lam[n] * (rho**n + rho**-n) / 2 for n, v in enumerate(coef[geo.cls[i]])) * (1 + 1e-9)
-        big_b *= 1 + 1e-9
-        m_nodes = 2
-        while 8 * big_b * rho ** (1 - m_nodes) / (rho - 1) > TOL_INTERP:
+        ra = arb(r)
+        big_b += geo.a[i] * (ra + 1 / ra) / 2
+        for n, v in enumerate(coef[geo.cls[i]]):
+            if v != 0.0:
+                big_b += abs(arb(v)) * (pi / n) * (ra**n + ra ** (-n)) / 2
+
+        def interp_remainder(m):
+            return 8 * big_b * ra ** (1 - m) / (ra - 1)
+
+        m_nodes = max(2, 2 * int(math.log(8 * up(big_b) / ((r - 1) * TOL_INTERP)) / math.log(r) / 2))  # floating-point guess
+        while not interp_remainder(m_nodes) < TOL_INTERP:
             m_nodes += 2
-        interp_err = 8 * big_b * rho ** (1 - m_nodes) / (rho - 1) * (1 + 1e-9)
+        interp_err = up(interp_remainder(m_nodes))
         # ---- quadrature in y: rectangle around [-1, 1] for each source arc j, target points on the slit x in [-1, 0]
         quad = {}
         for j in [i] + others:
@@ -241,21 +264,26 @@ def plan(geo, coef, log=print):
             else:
                 bq = min(0.3, SAFETY * float_distance(geo, i, j, (-1, 0)) / geo.speed[j])
             while True:
-                a_half_q = math.sqrt(1 + bq * bq) * (1 + 1e-12)
+                a_half_q, rq = ellipse(bq)
                 box = [(-1.0, 0.0), (0.0, 0.0), (-a_half_q, a_half_q), (-bq, bq)]
                 func = (lambda x, y: geo.self_kernel(i, x, y)) if j == i else (lambda x, y, j=j: geo.cross(i, j, x, y))
                 bd = bound_abs(func, box, [geo.speed[i], 0.0, geo.speed[j], geo.speed[j]])
                 if bd is not None:
                     break
                 bq /= 2
-            rq = rho_of(bq) * (1 - 1e-12)
-            const = 8 * math.pi * psi_sup[geo.cls[j]] * log_sup(bd) / (rq - 1) * (1 + 1e-9)
+            rqa = arb(rq)
+            const = 8 * pi * psi_sup[geo.cls[j]] * log_sup(bd) / (rqa - 1)
+
+            def quad_remainder(n_q):
+                return const * rqa ** (-(2 * n_q - 1 - deg))
+
             n_q = deg // 2 + 2
-            while const * rq ** (-(2 * n_q - 1 - deg)) > TOL_QUAD:
+            n_q = max(n_q, int((deg + 1 + math.log(max(up(const), 1e-300) / TOL_QUAD) / math.log(rq)) / 2))  # guess
+            while not quad_remainder(n_q) < TOL_QUAD:
                 n_q += 1
-            quad[j] = (n_q, const * rq ** (-(2 * n_q - 1 - deg)) * (1 + 1e-9))
-        out[i] = {"b": b, "rho": rho, "B": big_b, "M": m_nodes, "interp_err": interp_err, "quad": quad}
-        log(f"  slit {i} (class {geo.cls[i]}, a = {geo.fa[i]:.4f}): rho = {rho:.5f}, B = {big_b:.1f}, {m_nodes} interpolation nodes, "
+            quad[j] = (n_q, up(quad_remainder(n_q)))
+        out[i] = {"b": b, "rho": r, "B": up(big_b), "M": m_nodes, "interp_err": interp_err, "quad": quad}
+        log(f"  slit {i} (class {geo.cls[i]}, a = {geo.fa[i]:.4f}): r = {r:.5f}, B = {up(big_b):.1f}, {m_nodes} interpolation nodes, "
             f"quadrature nodes {min(q[0] for q in quad.values())}..{max(q[0] for q in quad.values())}, "
             f"{m_nodes // 2 * sum(q[0] for q in quad.values()):.2e} kernel evaluations; planned in {time.time() - t0:.0f} s")
     return out

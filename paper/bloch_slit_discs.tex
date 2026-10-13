@@ -20,16 +20,15 @@
 \hypersetup{pdftitle={An improved upper bound for the univalent Bloch-Landau constant},pdfauthor={Wynand van Staden}}
 \title[The univalent Bloch--Landau constant]{An improved upper bound for the univalent Bloch--Landau constant}
 \author{Wynand van Staden}
-\date{Draft of 13 October 2026. Not submitted. Prepared with substantial AI assistance; see Section~\ref{sec:disclosure}.}
+\date{Draft of 14 October 2026. Not submitted. Prepared with substantial AI assistance; see Section~\ref{sec:disclosure}.}
 
 \begin{document}
 
 \begin{abstract}
-We exhibit a disc with $24$ slits, $18$ of them curved, for which the ratio of inradius to conformal radius
-is less than $0.65628589$. This improves the best proved upper bound $0.6563937$ for the univalent
-Bloch--Landau constant (Carroll and Ortega-Cerd\`a, 2009) and lies below the best numerical value
-$0.656319277$ in the literature (Ortega-Cerd\`a and Pridhnani, 2010). The bound is established by a
-computer-assisted proof: the inradius is bounded by an exact covering argument, and the conformal radius is
+We exhibit a disc with $24$ slits, $18$ of them curved, and give a computer-assisted proof that its ratio of
+inradius to conformal radius is less than $0.65628589$. This is below the best previously proved upper bound
+$0.6563937$ for the univalent Bloch--Landau constant (Carroll and Ortega-Cerd\`a, 2009) and below the best
+numerical value $0.656319277$ in the literature (Ortega-Cerd\`a and Pridhnani, 2010). In the proof, the inradius is bounded by an exact covering argument, and the conformal radius is
 bounded below by a comparison function whose boundary values are controlled in ball arithmetic.
 The domain was found by an evolutionary search driven by a spectral integral-equation solver.
 \end{abstract}
@@ -38,32 +37,37 @@ The domain was found by an evolutionary search driven by a spectral integral-equ
 
 \section{Introduction}
 
-Let $\D$ be the unit disc. The \emph{univalent Bloch--Landau constant} $\U$ is the largest number such that
-$f(\D)$ contains a disc of radius $\U$ for every univalent $f$ on $\D$ with $|f'(0)|=1$.
-For a domain $D\subset\C$ write $R(D)$ for its \emph{inradius}, the supremum of the radii of the discs contained
-in $D$. If $D\ne\C$ is simply connected and $0\in D$, write $\rho(D)$ for its \emph{conformal radius} at $0$,
+Let $\D$ be the unit disc. For a domain $D\subset\C$ write $R(D)$ for its \emph{inradius}, the supremum of the
+radii of the discs contained in $D$. The \emph{univalent Bloch--Landau constant}, also called the univalent or
+schlicht Bloch constant, is
+\[
+\U=\inf\bigl\{R(f(\D)):\ f\text{ univalent in }\D,\ |f'(0)|=1\bigr\};
+\]
+thus $f(\D)$ contains discs of every radius less than $\U|f'(0)|$ for every univalent $f$ on $\D$.
+If $D\ne\C$ is simply connected and $0\in D$, write $\rho(D)$ for its \emph{conformal radius} at $0$,
 that is $|f'(0)|$ for a conformal map $f$ of $\D$ onto $D$ with $f(0)=0$. Applying the definition to $f/f'(0)$,
 \begin{equation}\label{eq:basic}
 \U\le\frac{R(D)}{\rho(D)}\qquad\text{for every simply connected }D\ne\C\text{ with }0\in D,
 \end{equation}
-and $\U$ is the infimum of the right-hand side. Every upper bound for $\U$ so far has been obtained from
-\eqref{eq:basic} with $D$ a disc from which slits have been removed (Table~\ref{tab:history}).
+and $\U$ is the infimum of the right-hand side. The bounds in Table~\ref{tab:history} were all obtained from
+\eqref{eq:basic} with $D$ a disc from which slits have been removed.
 
 \begin{table}[h]
-\centering\small
-\begin{tabular}{llll}
+\centering\small\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lll}
 \toprule
- & upper bound & domain & nature\\
+ & upper bound & domain: a disc minus\ldots\\
 \midrule
-Robinson \cite{Rob} (1935) & $0.658$ & six radial slits & closed form\\
-Goodman \cite{Good} (1945) & $0.65647$ & generations of radial slits & closed form\\
-Beller, Hummel \cite{BH} (1985) & $0.6564155$ & twelve radial slits & numerical\\
-Carroll, Ortega-Cerd\`a \cite{COC} (2009) & $0.6563937$ & radial slits and forked arcs & closed form\\
-Ortega-Cerd\`a, Pridhnani \cite{OCP} (2010) & $0.656319277$ & two forked arcs per half-sector & numerical\\
+Robinson \cite{Rob} (1935) & $0.658$ & radial slits\\
+Goodman \cite{Good} (1945) & $0.65647$ & radial slits in bisecting generations\\
+Beller, Hummel \cite{BH} (1985) & $0.6564155$ & radial slits, third generation not bisecting\\
+Carroll, Ortega-Cerd\`a \cite{COC} (2009) & $0.6563937$ & six radial slits, six harmonically symmetric arcs\\
+Ortega-Cerd\`a, Pridhnani \cite{OCP} (2010) & $0.656319277$ & as \cite{COC}, with more such arcs\\
 \bottomrule
 \end{tabular}
-\caption{Upper bounds for $\U$. The authors of \cite{OCP} state that no rigorous error analysis was made for
-their value. The best lower bound known to us is $0.5708858$ \cite{Sk}.}\label{tab:history}
+\caption{Upper bounds for $\U$. The value of \cite{COC} is the numerical evaluation of an explicit formula. The
+values of \cite{BH} and \cite{OCP} are numerical; the authors of \cite{OCP} state that they have not done a
+rigorous error analysis. The best lower bound known to us is $0.5708858$ \cite{Sk}.}\label{tab:history}
 \end{table}
 
 \begin{theorem}\label{thm:main}
@@ -77,15 +81,16 @@ R(D)\le 1+10^{-9}\quad\text{(Proposition \ref{prop:inradius})},\qquad
 \rho(D)\ge 1.523726208329\quad\text{(Proposition \ref{prop:rho})},
 \]
 and $(1+10^{-9})/1.523726208329<0.65628589$.
-Both parts rely on computations, carried out in exact integer arithmetic or in ball arithmetic with the Arb
+Both parts rely on computations, carried out in exact integer arithmetic and in ball arithmetic with the Arb
 library \cite{Arb}; the programs are part of the repository accompanying this paper and run in about one minute.
 Section~\ref{sec:numerics} describes how the domain was found and the independent numerical checks, none of
 which is used in the proof.
 
-The domains of \cite{COC,OCP} satisfy a necessary condition for extremality (harmonic symmetry of the free arcs)
-which makes them amenable to explicit formulas. No such condition is imposed here: the slits are taken from a
-four-parameter family and optimised numerically. The resulting domain nevertheless resembles the tree-like domains
-of \cite{COC,OCP} (Figure~\ref{fig:domain}).
+The domains of \cite{COC,OCP} are built from arcs that are harmonically symmetric, a condition which is necessary
+for the boundary arcs of an extremal domain that do not touch an extremal disc \cite{Car} and which makes those
+domains amenable to explicit computation. No such condition is imposed here: the slits are taken from a
+four-parameter family and optimised numerically. The resulting domain nevertheless resembles the domain
+of \cite{OCP} (Figure~\ref{fig:domain}).
 
 \section{The domain}\label{sec:domain}
 
@@ -99,8 +104,10 @@ segment $[te^{i\theta},Re^{i\theta}]$.
 
 Let $R=5.001117628756668$. The slits of our domain are those with the parameters $(\theta,t,b_1,b_2)$ of
 Table~\ref{tab:params} together with their images under the group generated by $z\mapsto e^{2\pi i/3}z$ and
-$z\mapsto\bar z$, that is, the slits with parameters $(2\pi r/3\pm\theta,\,t,\,\pm b_1,\,\pm b_2)$, $r=0,1,2$.
-This gives $24$ slits in five classes. All decimal numbers in this section are to be read as exact rational numbers.
+$z\mapsto\bar z$, that is, the slits with parameters
+$(2\pi r/3+\varepsilon\theta,\ t,\ \varepsilon b_1,\ \varepsilon b_2)$, $r=0,1,2$, $\varepsilon=\pm1$.
+For classes $0$ and $1$, where $b_1=b_2=0$ and $\theta\in\{0,\pi/3\}$, the two signs give the same three slits;
+for the other classes they give six. This gives $24$ slits in five classes. All decimal numbers in this section are to be read as exact rational numbers.
 
 \begin{table}[h]
 \centering\footnotesize\setlength{\tabcolsep}{4pt}
@@ -134,8 +141,8 @@ component. The statement about the boundary is clear.
 \end{proof}
 
 \begin{remark}
-The slits are in fact pairwise disjoint (the smallest distance between two of them is about $0.1484$), so
-$D=\{|z|<R\}\setminus K$; this is not needed for the proof.
+Numerically, the slits are pairwise disjoint (the smallest distance between two of them is about $0.1484$), so
+that $D=\{|z|<R\}\setminus K$; this is not needed for the proof.
 \end{remark}
 
 \begin{figure}[h]
@@ -175,7 +182,8 @@ The program \texttt{inradius\_certificate.py} produces a finite family of closed
 $[i2^{3-\ell},(i+1)2^{3-\ell}]\times[j2^{3-\ell},(j+1)2^{3-\ell}]$ with integers $\ell\ge6$ and
 $0\le i,j<2^\ell$, and verifies the following.
 \begin{enumerate}[label=(\roman*),leftmargin=2.2em]
-\item \emph{The cells cover $[0,8]^2$.} No cell is contained in another, and the areas of the cells add up to $64$;
+\item \emph{The cells cover $[0,8]^2$.} The cells are pairwise distinct, none is contained in another, and their
+areas add up to $64$;
 both statements are checked in exact arithmetic. Since two dyadic squares are either nested or have disjoint
 interiors, the cells tile the square.
 \item Each cell $[x_0,x_1]\times[y_0,y_1]$ is of one of three kinds:
@@ -237,8 +245,10 @@ because the imaginary part of $w_j$ is even in $x$. Put
 \]
 $\Phi$ is harmonic in $\C\setminus2\pi i\Z$, it is $2\pi i$-periodic, $\Phi(-w)=\Phi(\bar w)=\Phi(w)$, and
 \begin{equation}\label{eq:phi-asym}
-\Phi(w)=-\tfrac12|\re w|-\log\bigl|1-e^{-|\re w|-i\,\im w\,\mathrm{sgn}(\re w)}\bigr|=-\tfrac12|\re w|+O(e^{-|\re w|}).
+\Phi(w)=-\tfrac12|\re w|-\log\bigl|1-e^{-|\re w|-i\,\im w\,\mathrm{sgn}(\re w)}\bigr|=-\tfrac12|\re w|+O(e^{-|\re w|})
+\quad(|\re w|\to\infty),
 \end{equation}
+where $\mathrm{sgn}(0)=1$.
 
 For each slit let $\psi_j$ be a real polynomial that is \emph{odd}, with Chebyshev expansion
 $\psi_j=\sum_{n\ \mathrm{odd}}c_{j,n}T_n$, and assume that $\psi_j=\psi_{j'}$ whenever the slits $j$ and $j'$
@@ -268,9 +278,11 @@ $y=\cos\vartheta$: each term of \eqref{eq:U} is $\int_0^\pi\Phi(w-w_j(\cos\varth
 the potential, with kernel $\Phi$, of a measure $\nu$ with bounded density with respect to $d\vartheta$. Since
 $\re w_j(\cos\vartheta)=L+a_j\cos\vartheta$ and the set $\{\vartheta\in[0,\pi]:|\cos\vartheta-\xi|<\eta\}$ has
 length at most $C\sqrt\eta$ for all $\xi$, every disc of radius $\eta$ has $|\nu|$-measure at most $C'\sqrt\eta$.
-As $\Phi(w)+\log|w|$ is continuous near $0$, this implies
-$\sup_w\int_{|w-\zeta|<\eta}\bigl|\log|w-\zeta|\bigr|\,d|\nu|(\zeta)\to0$ as $\eta\to0$, which gives the continuity
-of the potential (see e.g.\ \cite[Section~3.1]{Rans}).
+Splitting the integral over $\{|w-\zeta|<\eta\}$ into the annuli $2^{-k-1}\eta\le|w-\zeta|<2^{-k}\eta$ gives
+$\sup_w\int_{|w-\zeta|<\eta}\bigl|\log|w-\zeta|\bigr|\,d|\nu|(\zeta)\to0$ as $\eta\to0$. As $\Phi(w)+\log|w|$ is
+continuous near $0$, the potential is therefore the uniform limit, as $\eta\to0$, of the potentials with the
+continuous kernels $\min(\Phi,\log(1/\eta))$, and so it is continuous. (For background on logarithmic potentials
+see \cite{Rans}.)
 
 (b) $L-\re w$ changes sign under $\sigma$. Since $\sigma(w)-\sigma(w')=-\overline{(w-w')}$ and
 $\Phi(-\bar w)=\Phi(w)$, \eqref{eq:sigma} gives $\Phi(\sigma(w)-w_j(y))=\Phi(w-w_j(-y))$; substituting
@@ -300,8 +312,9 @@ and $v=-\delta\le0$ on the circle, $v\le0$ on $K$.
 
 Proposition \ref{prop:criterion} holds for arbitrary odd polynomials $\psi_j$. In the proof of
 Proposition~\ref{prop:rho} they are obtained from a floating-point solution of the integral equation $U=0$ on
-the arcs (Section~\ref{sec:numerics}), rounded to double-precision numbers and stored in a data file; the quality
-of that solution affects only the size of $\delta$.
+the arcs (Section~\ref{sec:numerics}): the coefficients are averaged over each class, the even-indexed ones are
+set to zero, and the result, in double precision, is stored in a data file. The quality of that solution affects
+only the size of $\delta$.
 
 \subsection{Bounding $u$ on a slit}
 
@@ -385,11 +398,11 @@ $\pi\|\varrho\|\|\psi\|$.
 \end{proof}
 
 \begin{lemma}[Interpolation]\label{lem:interp}
-Let $f$ be continuous on $[-1,1]$ with Chebyshev coefficients $|a_k|\le C\rho^{-k}$ for $k\ge1$, $\rho>1$, and
+Let $f$ be continuous on $[-1,1]$ with Chebyshev coefficients $|\phi_k|\le Cr^{-k}$ for $k\ge1$, $r>1$, and
 let $p=\sum_{q<M}\gamma_qT_q$ be the polynomial of degree less than $M$ that interpolates $f$ at the zeros of
 $T_M$. Then
 \[
-\|f\|\le\sum_{q<M}|\gamma_q|+\frac{2C}{\rho-1}\,\rho^{1-M}.
+\|f\|\le\sum_{q<M}|\gamma_q|+\frac{2C}{r-1}\,r^{1-M}.
 \]
 \end{lemma}
 
@@ -397,24 +410,28 @@ $T_M$. Then
 At the zeros $x_l=\cos\frac{(2l+1)\pi}{2M}$ of $T_M$ and for $k=2Mm\pm k'$ with $0\le k'\le M$ one has
 $T_k(x_l)=(-1)^mT_{k'}(x_l)$, and $T_M(x_l)=0$. So the interpolant of $T_k$, $k\ge M$, is $\pm T_{k'}$ with
 $k'<M$, or $0$, and $\|T_k-\text{interpolant}\|\le2$. Since interpolation is linear and reproduces polynomials
-of degree less than $M$, $\|f-p\|\le2\sum_{k\ge M}|a_k|\le2C\rho^{1-M}/(\rho-1)$. Finally
+of degree less than $M$, $\|f-p\|\le2\sum_{k\ge M}|\phi_k|\le2Cr^{1-M}/(r-1)$. Finally
 $\|p\|\le\sum|\gamma_q|$.
 \end{proof}
 
 \subsection{The certificate}\label{sec:cert}
 
 Fix a class representative $i$. The program \texttt{conformal\_certificate.py} performs the following steps.
-All quantities called ``bounds'' are obtained in ball arithmetic; floating-point numbers are used only to choose
-the parameters $b$, $b'_{ij}$, $M$, $N_{ij}$, and a poor choice could only make a step fail.
+All bounds below (the kernel bounds, $\|\psi_j\|$, $A_{ij}$, $B_i$, the remainders, the values at the nodes and
+the final result) are computed in ball arithmetic. Floating-point numbers are used only to choose the parameters
+$b$, $b'_{ij}$, $M$, $N_{ij}$ and the boxes of the branch and bound, where a poor choice could only make a step
+fail, and to pass enclosures between processes as a double-precision midpoint with an upward-rounded radius.
+The program also verifies that the even-indexed coefficients in the data file are zero, and that each ellipse lies
+in its rectangle.
 
 \smallskip\noindent\textbf{Step 1: kernel bounds in the variable $x$.}
-A number $b>0$ is chosen and, for every $j$, numbers $0<m_{ij}\le M_{ij}$ are computed with
+A number $b>0$ is chosen and, for every $j$, numbers $0<\lambda_{ij}\le\Lambda_{ij}$ are computed with
 \begin{equation}\label{eq:kb}
-m_{ij}\le|G_{ij}(x,y)|\le M_{ij}\quad(j\ne i),\qquad m_{ii}\le|K_i(x,y)|\le M_{ii}\qquad\text{for }x\in Q_b,\ y\in[-1,1].
+\lambda_{ij}\le|G_{ij}(x,y)|\le\Lambda_{ij}\quad(j\ne i),\qquad\lambda_{ii}\le|K_i(x,y)|\le\Lambda_{ii}\qquad\text{for }x\in Q_b,\ y\in[-1,1].
 \end{equation}
 This is done by branch and bound: the set $Q_b\times[-1,1]$, of real dimension three, is bisected into boxes until
 on each box the ball-arithmetic evaluation of the kernel gives an enclosure excluding $0$, with upper bound less
-than four times the lower bound. Put $A_{ij}=\max(|\log m_{ij}|,|\log M_{ij}|)$.
+than four times the lower bound. Put $A_{ij}=\max(|\log\lambda_{ij}|,|\log\Lambda_{ij}|)$.
 
 Since the kernels are continuous and do not vanish on the simply connected set $Q_b\times[-1,1]$ (nor on a
 neighbourhood of it), they have continuous logarithms there, analytic in $x$. Thus
@@ -422,15 +439,16 @@ neighbourhood of it), they have continuous logarithms there, analytic in $x$. Th
 h_i(x)={}&-a_ix+\sum_nc_{i,n}\frac\pi nT_n(x)-\int_{-1}^1\log K_i(x,y)\,\psi_i(y)\,d\mu(y)\\
 &-\sum_{j\ne i}\int_{-1}^1\log G_{ij}(x,y)\,\psi_j(y)\,d\mu(y)
 \end{align*}
-is analytic in a neighbourhood of $Q_b\supset E_\rho$, $\rho=b+\sqrt{1+b^2}$, and $\re h_i=f_i$ on $[-1,1]$ by
-\eqref{eq:f}. On $E_\rho$ we have $|\re x|\le\frac12(\rho+\rho^{-1})$, $|T_n(x)|\le\frac12(\rho^n+\rho^{-n})$ and
+is analytic in a neighbourhood of $Q_b\supset E_{r_i}$, where $r_i$ is slightly less than $b+\sqrt{1+b^2}$, and
+$\re h_i=f_i$ on $[-1,1]$ by \eqref{eq:f}. Write $r=r_i$. On $E_r$ we have $|\re x|\le\frac12(r+r^{-1})$,
+$|T_n(x)|\le\frac12(r^n+r^{-n})$ and
 $|\re\log(\cdot)|=|\log|\cdot||\le A_{ij}$, so
 \[
-|\re h_i|\le B_i:=\tfrac12a_i(\rho+\rho^{-1})+\sum_n|c_{i,n}|\frac\pi{2n}(\rho^n+\rho^{-n})+\pi\sum_j\|\psi_j\|A_{ij}
-\quad\text{on }E_\rho,
+|\re h_i|\le B_i:=\tfrac12a_i(r+r^{-1})+\sum_n|c_{i,n}|\frac\pi{2n}(r^n+r^{-n})+\pi\sum_j\|\psi_j\|A_{ij}
+\quad\text{on }E_r,
 \]
 where $\|\psi_j\|$ is bounded by $\sum_n|c_{j,n}|$. By Lemma \ref{lem:coef} the Chebyshev coefficients of $f_i$
-satisfy $|a_k|\le4B_i\rho^{-k}$.
+satisfy $|\phi_k|\le4B_ir_i^{-k}$.
 
 \smallskip\noindent\textbf{Step 2: kernel bounds in the variable $y$.}
 For every $j$ a number $b'_{ij}>0$ is chosen and bounds of the form \eqref{eq:kb} are computed in the same way for
@@ -444,7 +462,7 @@ Gauss--Chebyshev rule computes the corresponding integral in \eqref{eq:f} with a
 $N=N_{ij}$ is chosen so that this is at most $10^{-13}$.
 
 \smallskip\noindent\textbf{Step 3: values at the nodes.}
-$M$ (even) is chosen so that $8B_i\rho^{1-M}/(\rho-1)\le10^{-9}$. At each zero $x_k<0$ of $T_M$ an enclosure of
+$M$ (even) is chosen so that $8B_ir_i^{1-M}/(r_i-1)\le10^{-9}$. At each zero $x_k<0$ of $T_M$ an enclosure of
 $f_i(x_k)$ is computed from \eqref{eq:f}: the first two terms directly, each integral by the Gauss--Chebyshev rule
 with $N_{ij}$ nodes, adding the bound \eqref{eq:qerr} to the radius. The values at the nodes $x_k>0$ follow from
 the oddness of $f_i$.
@@ -453,7 +471,7 @@ the oddness of $f_i$.
 The coefficients $\gamma_q$ of the interpolant are computed from the enclosures of the $f_i(x_k)$ by the discrete
 cosine transform, in ball arithmetic. By Lemma \ref{lem:interp},
 \[
-\sup_{[-1,1]}|f_i|\le\delta_i:=\sum_{q<M}|\gamma_q|+\frac{8B_i}{\rho-1}\rho^{1-M}.
+\sup_{[-1,1]}|f_i|\le\delta_i:=\sum_{q<M}|\gamma_q|+\frac{8B_i}{r_i-1}r_i^{1-M}.
 \]
 Then $\delta=\max_i\delta_i$ satisfies the hypothesis of Proposition \ref{prop:criterion}, and the program
 evaluates $\exp(c-\delta)$ in ball arithmetic, with $c$ from \eqref{eq:c}, and rounds it down.
@@ -471,7 +489,7 @@ $\rho(D)\ge\exp(c-\delta)\ge1.523726208329$.
 \centering\small
 \begin{tabular}{ccccccc}
 \toprule
-class & $a_i$ & $\rho$ & $B_i$ & $M$ & $N_{ij}$ & $\delta_i$\\
+class & $a_i$ & $r_i$ & $B_i$ & $M$ & $N_{ij}$ & $\delta_i$\\
 \midrule
 0 & $1.6097$ & $1.00934$ & $9.4$ & $3196$ & $79$--$2225$ & $2.66\times10^{-8}$\\
 1 & $0.9165$ & $1.01733$ & $6.6$ & $1676$ & $78$--$1118$ & $3.55\times10^{-9}$\\
@@ -480,7 +498,7 @@ class & $a_i$ & $\rho$ & $B_i$ & $M$ & $N_{ij}$ & $\delta_i$\\
 4 & $0.1411$ & $1.34403$ & $4.1$ & $88$ & $76$--$153$ & $7.48\times10^{-10}$\\
 \bottomrule
 \end{tabular}
-\caption{Data of the certificate for the five classes. The small values of $\rho-1$ for classes $0$ and $2$,
+\caption{Data of the certificate for the five classes. The small values of $r_i-1$ for classes $0$ and $2$,
 and $1$ and $3$, reflect the proximity of the slits of these classes: about $0.03$ in the $w$-plane.}\label{tab:cert}
 \end{table}
 
@@ -498,8 +516,11 @@ six-slit disc (see below) & $1.520743036313$ & $1.520743034966$\\
 \end{tabular}
 \end{center}
 The six-slit disc is $\{|z|<3\}$ minus the segments $[1,3)e^{2\pi ik/3}$ and $[2,3)e^{\pi i(2k+1)/3}$, $k=0,1,2$.
-The first value is $4s/(1+s)^2$ with $s=\frac12$; the second is obtained from the first family by the map
-$z\mapsto z^3$ and a Koebe-type slit map.
+The first value is $\rho(\D\setminus[s,1))=4s/(1+s)^2$ with $s=\frac12$, which follows from the Koebe function.
+For the second, with $R=3$ and $t=2$: let $s=R^{-3}$ and let $g$ be the conformal map of $\D\setminus[s,1)$ onto
+$\D$ with $g(0)=0$, $g'(0)>0$; it maps $(-1,0)$ into itself. With $-\beta=g(-(t/R)^3)$, applying $z\mapsto z^3$,
+then $g$, then a cube root, then the same procedure for the slit $[\beta,1)$, gives
+$\rho=R\,\bigl(4s/(1+s)^2\bigr)^{1/3}\bigl(4\beta/(1+\beta)^2\bigr)^{1/3}$.
 \end{remark}
 
 \begin{proof}[Proof of Theorem \ref{thm:main}]
@@ -518,22 +539,23 @@ The Green function of $D$ is sought in the form \eqref{eq:U}, with $\psi_j$ a po
 Requiring $U=0$ at the $n$ zeros of $T_n$ on every arc, with the logarithmic part of the self-interaction
 integrated exactly (Lemma \ref{lem:logkernel}) and all other integrals computed by the $n$-point Gauss--Chebyshev
 rule, gives a linear system of size $24n$ with condition number of order $10^3$. Then
-$\rho\approx\exp(c)$ with $c$ from \eqref{eq:c}. The method converges exponentially: for $D$ the value
-$\rho=1.523726248805$ is stable from $n=64$ to $n=128$. It reproduces the closed-form values of the Remark above
-to $10^{-16}$.
+$\rho\approx\exp(c)$ with $c$ from \eqref{eq:c}. In practice the method converges very fast: for $D$ the value
+$\rho=1.523726248805$ is the same for $n=64$, $96$ and $128$. For slit discs of the two types of the Remark
+above it agrees with the closed-form values to rounding error (at most $3\times10^{-16}$).
 
 \subsection*{The search}
-The parameters $R$ and $(\theta,t,b_1,b_2)$ of the free classes were optimised by differential evolution
-\cite{SP}, followed by a simplex search, the objective being the ratio of a floating-point inradius (local maxima
-of the distance to the boundary, located on a grid and refined by Newton's method) to the computed conformal
-radius. Earlier bounds were reproduced on the way: six radial slits give $0.657793$ (compare \cite{Rob}) and
-twelve radial slits give $0.6564163$ (compare \cite{BH}).
+The parameters $R$, the tip modulus of class $1$ and $(\theta,t,b_1,b_2)$ for classes $2$ to $4$ were optimised
+by differential evolution \cite{SP}, followed by a simplex search, the objective being the ratio of a
+floating-point inradius (local maxima of the distance to the boundary, located on a grid and refined by Newton's
+method) to the computed conformal radius. As a check, the best disc with six radial slits gives $0.657793$, in
+agreement with \cite{Rob}; the best disc with twelve radial slits that we found gives $0.6564163$, slightly above
+the value $0.6564155$ of \cite{BH}.
 
 \subsection*{Independent recomputation}
-Separately written programs, using different methods, reproduced the values for $D$: a branch-and-bound over the
-whole disc gave $1\le R(D)\le1+2\times10^{-8}$, and a boundary integral equation in the $z$-plane, with graded
-panels at the tips and no use of symmetry, gave $\rho(D)=1.5237262488052$, stable under changes of the
-discretisation and under the substitution $\zeta=z^3$.
+Separately written floating-point programs, using different methods, reproduced the values for $D$: a
+branch and bound over the whole disc found no disc of radius greater than $1+2\times10^{-8}$, and a boundary
+integral equation in the $z$-plane, with a parametrisation adapted to the tips and no use of symmetry, gave
+$\rho(D)=1.5237262488052$, stable under changes of the discretisation and under the substitution $\zeta=z^3$.
 
 \subsection*{The numerical value}
 The floating-point value of the ratio is $0.656285866$; the proved bound is weaker by $1.8\times10^{-8}$.
@@ -543,11 +565,12 @@ The floating-point value of the ratio is $0.656285866$; the proved bound is weak
 \begin{enumerate}[leftmargin=2em]
 \item \emph{What is trusted.} The proof relies on the correctness of the Arb library \cite{Arb} and its Python
 interface, of integer arithmetic in Python, and of the two certificate programs, which together comprise about
-$600$ lines.
-\item \emph{Optimality.} The domain is a local optimum within a small family and does not satisfy the necessary
-condition of \cite{COC}; the bound of Theorem \ref{thm:main} is certainly not sharp.
-\item \emph{Other domains.} A simpler domain with $18$ slits, twelve of them of the form \eqref{eq:slit} with
-$b_2=0$, gives $\U<0.65630853$ by the same programs.
+$650$ lines. It has not yet been refereed.
+\item \emph{Optimality.} The domain is the output of a numerical search in a small family. We have not examined
+whether its arcs are harmonically symmetric, and there is no reason to expect the bound of
+Theorem~\ref{thm:main} to be sharp.
+\item \emph{Other domains.} A simpler domain with $18$ slits, six radial and twelve curved with $b_2=0$, gives
+$\U<0.65630853$ by the same programs.
 \end{enumerate}
 
 \section{Disclosure of AI use}\label{sec:disclosure}
@@ -559,18 +582,22 @@ and of the argument of Sections \ref{sec:inradius}--\ref{sec:rho} were carried o
 same system. The author directed the work, proposed the use of an evolutionary search, and is responsible for the
 correctness of the results.
 
-\begin{thebibliography}{9}
+\begin{thebibliography}{10}
 \bibitem{BH} E.~Beller and J.~A.~Hummel, \emph{On the univalent Bloch constant}, Complex Variables Theory Appl.
 \textbf{4} (1985), 243--252.
+\bibitem{Car} T.~Carroll, \emph{An extension of Jenkins' condition for extremal domains associated with the
+univalent Bloch--Landau constant}, Comput. Methods Funct. Theory \textbf{8} (2008), 159--165.
 \bibitem{COC} T.~Carroll and J.~Ortega-Cerd\`a, \emph{The univalent Bloch--Landau constant, harmonic symmetry and
-conformal glueing}, J. Math. Pures Appl. \textbf{92} (2009), 396--406; arXiv:0806.2282.
+conformal glueing}, J. Math. Pures Appl. (9) \textbf{92} (2009), 396--406; arXiv:0806.2282.
 \bibitem{Good} R.~E.~Goodman, \emph{On the Bloch--Landau constant for schlicht functions}, Bull. Amer. Math. Soc.
 \textbf{51} (1945), 234--239.
 \bibitem{Arb} F.~Johansson, \emph{Arb: efficient arbitrary-precision midpoint-radius interval arithmetic}, IEEE
 Trans. Comput. \textbf{66} (2017), 1281--1292.
-\bibitem{OCP} J.~Ortega-Cerd\`a and B.~Pridhnani, \emph{The P\'olya--Tchebotar\"ov problem}, Contemp. Math.
-\textbf{505} (2010), 153--170; arXiv:0809.2483.
-\bibitem{Rans} T.~Ransford, \emph{Potential theory in the complex plane}, Cambridge University Press, 1995.
+\bibitem{OCP} J.~Ortega-Cerd\`a and B.~Pridhnani, \emph{The P\'olya--Tchebotar\"ov problem}, in: Harmonic analysis
+and partial differential equations, Contemp. Math. \textbf{505}, Amer. Math. Soc., Providence, RI, 2010,
+pp.~153--170; arXiv:0809.2483.
+\bibitem{Rans} T.~Ransford, \emph{Potential theory in the complex plane}, London Math. Soc. Student Texts
+\textbf{28}, Cambridge University Press, Cambridge, 1995.
 \bibitem{Rob} R.~M.~Robinson, \emph{The Bloch constant $\mathfrak A$ for a schlicht function}, Bull. Amer. Math.
 Soc. \textbf{41} (1935), 535--540.
 \bibitem{Sk} B.~Skinner, \emph{The univalent Bloch constant problem}, Complex Var. Elliptic Equ. \textbf{54}
@@ -579,7 +606,8 @@ Soc. \textbf{41} (1935), 535--540.
 optimization over continuous spaces}, J. Global Optim. \textbf{11} (1997), 341--359.
 \end{thebibliography}
 
-\medskip\noindent\emph{Note for this draft.} The bibliographic details above, and the description of the domain of
-\cite{BH}, which was not available to us, must be checked against the originals before submission.
+\medskip\noindent\emph{Note for this draft.} The papers \cite{Rob,Good,BH,Car} were not available to us in full;
+their descriptions here are taken from \cite{COC,OCP} and from reviews, and must be checked against the originals
+before submission.
 
 \end{document}
