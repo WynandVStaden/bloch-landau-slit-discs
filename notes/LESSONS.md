@@ -39,9 +39,37 @@ This explains the strategy: to lower $\rho$ the walker must actually land on a c
 * Disc of radius 2: $R=2$, $\rho=2$, ratio 1.
 * One cut from 1 to 2: $R=1.5$ (not 1), $\rho=16/9$.
 
-### Open question
-Add a second cut opposite the first, from $x=-2$ to $x=-1$. Where does the largest coin go, and roughly what is $R$?
+### Answer to the two-cut question
+Cuts from $1$ to $2$ and from $-2$ to $-1$: the coin moves up (or down). Centre $(0,y)$: distance to each tip is $\sqrt{1+y^2}$, distance to the circle is $2-y$. Equal when $y=\tfrac34$, so $R=1.25$.
 
-## Next: Lesson 2
+## Lesson 2: Green's functions
 
-Green's functions: the function that encodes "where the walker lands", why its constant term at the pole is $\log\rho$, and how that turns the problem into solving Laplace's equation on the shape.
+**1. Harmonic functions.** $u(x,y)$ is harmonic if $u_{xx}+u_{yy}=0$. Two facts do all the work:
+* *Mean value:* $u$ at a point equals its average over any circle round that point (inside the region).
+* *Maximum principle:* a harmonic function on a region takes its largest and smallest values on the boundary. Consequence: if $u\ge0$ on the boundary then $u\ge0$ inside.
+
+**2. Where they come from.** The real part of any function with a complex derivative is harmonic. The key example is $\log|z|=\operatorname{Re}\log z$, harmonic everywhere except $z=0$. And if $u$ is harmonic and $f$ is conformal, $u(f(\zeta))$ is harmonic again.
+
+**3. The Green function.** For a shape $D$ containing $0$, $g$ is the function with
+* $g$ harmonic in $D$ except at $0$,
+* $g=0$ on the boundary,
+* $g(z)=-\log|z|+c+(\text{something}\to0)$ near $0$.
+
+It is unique (the difference of two candidates is harmonic and $0$ on the boundary, hence $0$). Unit disc: $g=-\log|z|$, $c=0$. Disc of radius 5: $g=\log(5/|z|)$, $c=\log5$.
+
+**4. The constant is $\log\rho$.** Let $f$ map the unit disc onto $D$, $f(0)=0$. Then $G(\zeta)=g(f(\zeta))$ is harmonic off $0$, zero on the unit circle, with a log pole: so $G(\zeta)=-\log|\zeta|$. Near $0$, $z=f(\zeta)\approx f'(0)\zeta$, so $-\log|\zeta|=-\log|z|+\log|f'(0)|$. Hence
+$$c=\log\rho(D).$$
+Computing $\rho$ = solving Laplace's equation on $D$ and reading off one constant. No map needed.
+
+**5. Link to the random walker.** $h=g+\log|z|$ is harmonic in all of $D$, equals $\log|z|$ on the boundary, and $h(0)=\log\rho$. A harmonic function's value at a point is the average of its boundary values weighted by where the walker lands: $\log\rho=$ average of $\log|\text{landing point}|$.
+
+**6. The comparison trick (this is the proof).** Suppose $v$ has the same pole, $v=-\log|z|+c'+\dots$, is harmonic elsewhere, and $v\le0$ on the boundary. Then $g-v$ is harmonic in $D$ and $\ge0$ on the boundary, so $\ge0$ inside; at $0$ it equals $\log\rho-c'$. So $\log\rho\ge c'$.
+We never need the exact $g$: the computer's approximate solution $U$, shifted down by its largest value $\delta$ on the cuts, is such a $v$. That is the whole certificate: prove $U\le\delta$ on the cuts.
+
+### Questions
+1. Half-plane $\{\operatorname{Re}z<1\}$: check that $g(z)=\log\left|\dfrac{2-z}{z}\right|$ works, and read off $\rho$.
+2. If $D\subset D'$, which has the larger $\rho$? Prove it with step 6.
+
+## Next: Lesson 3
+
+How the computer finds $U$: logarithms of charges spread along the cuts, why $\log z$ straightens the picture, and the mirror trick that makes $U=0$ on the circle automatically.
