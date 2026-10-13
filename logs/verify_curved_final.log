@@ -1,0 +1,12 @@
+﻿R = 4.747749358688023; 18 slits
+   leaves the circle at +-0.0000 deg, bend +0.00000, tip at radius 1.0 and angle 0.0000 deg
+   leaves the circle at +-60.0000 deg, bend +0.00000, tip at radius 1.9999999999999036 and angle 60.0000 deg
+   leaves the circle at +-7.1008 deg, bend +0.67381, tip at radius 2.8051388295325297 and angle 17.7911 deg
+   leaves the circle at +-44.7957 deg, bend -0.69787, tip at radius 3.710751140554841 and angle 42.3674 deg
+smallest distance between two different slits: 0.55974
+inradius: routine 1.000000000 | fine 1.000000000 | brute force on 30000-point slits + polish 1.000000000 (at -2.5443-1.0001j)
+conformal radius by resolution: {40: '1.523673647103', 64: '1.523673647065', 96: '1.523673647065', 128: '1.523673647065'}
+conformal radius of the rotated design: 1.523673647065
+largest |Green function| on the slits at test points (n=96): 8.42e-13
+
+ratio = 1.000000000 / 1.523673647 = 0.656308523;  record 0.6563937;  difference -8.518e-05

@@ -1,0 +1,12 @@
+﻿R = 5.23368
+   slits at +-0.00000 deg (and rotations by 120 deg), from radius 1.0 to the circle
+   slits at +-60.00000 deg (and rotations by 120 deg), from radius 2.0 to the circle
+   slits at +-45.97872 deg (and rotations by 120 deg), from radius 3.74887 to the circle
+   slits at +-18.90302 deg (and rotations by 120 deg), from radius 2.83043 to the circle
+number of slits: 18
+inradius: fast 1.0000000000 | fine grid 1.0000000000 | curved routine 1.0000000000 | brute force + polish 1.0000000000
+conformal radius by resolution: {24: '1.523544396684', 40: '1.523544432901', 64: '1.523544432926', 96: '1.523544432926', 128: '1.523544432926'}
+conformal radius of the rotated design: 1.523544432926
+
+ratio = largest inradius / smallest conformal radius = 1.0000000000 / 1.5235444329 = 0.656364185
+record 0.6563937; difference -2.952e-05  ->  BELOW the record

@@ -1,0 +1,19 @@
+﻿R = 5.001117628756668; 24 slits; crossing test: False
+   leaves the circle at +-0.0000 deg, tip at radius 1.000000 and angle 0.0000 deg, bends +0.00000, +0.00000
+   leaves the circle at +-60.0000 deg, tip at radius 2.000000 and angle 60.0000 deg, bends +0.00000, +0.00000
+   leaves the circle at +-1.7149 deg, tip at radius 2.789342 and angle 17.1476 deg, bends +0.90269, -0.33015
+   leaves the circle at +-58.1959 deg, tip at radius 3.473381 and angle 49.5508 deg, bends -1.26561, +0.97943
+   leaves the circle at +-32.9896 deg, tip at radius 4.342874 and angle 33.0932 deg, bends +0.03226, +2.93601
+smallest distance between two different slits: 0.14842
+inradius: routine 1.0000000000 | fine 1.0000000000
+   brute force: 8 million points, largest clearance so far 0.9995844
+   brute force: 15 million points, largest clearance so far 0.9997751
+   brute force: 22 million points, largest clearance so far 0.9998095
+   brute force: 30 million points, largest clearance so far 0.9998095
+inradius by brute force + polish: 0.999996181 (at -2.4870+1.0000j)
+conformal radius by resolution: {40: '1.523726248791', 64: '1.523726248805', 96: '1.523726248805', 128: '1.523726248805'}
+conformal radius of the rotated design: 1.523726248805
+largest |Green function| on the slits at test points (n=96): 8.03e-10
+
+ratio = 1.000000000 / 1.523726249 = 0.656285866
+below the best published numerical value 0.656319277272 by +3.341e-05; below the best proved bound 0.6563937 by +1.078e-04
