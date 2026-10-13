@@ -1,10 +1,10 @@
 # Slit discs and the upper bound for the univalent Bloch–Landau constant
 
-**DRAFT — private, not submitted. All values are numerical and have not been certified by validated arithmetic. Author: Wynand van Staden. Prepared with substantial AI assistance; see the disclosure at the end.**
+**DRAFT — private, not submitted. The computer-assisted proof in Section 7 is new (2026-10-13) and is still being audited. Author: Wynand van Staden. Prepared with substantial AI assistance; see the disclosure at the end.**
 
 ## Abstract
 
-The univalent Bloch–Landau constant $\mathcal U$ is the largest number such that the image of the unit disc under any univalent $f$ with $|f'(0)|=1$ contains a disc of radius $\mathcal U$. The best bound obtained from an explicit formula is $\mathcal U\le0.6563937$ (Carroll and Ortega-Cerdà, 2009); the best numerical value in the literature is $\mathcal U\le0.656319277$ (Ortega-Cerdà and Pridhnani, 2010), stated without rigorous error analysis. We describe an explicit disc with 24 slits whose ratio of inradius to conformal radius is, numerically, $0.656285866$. The conformal radius is computed by a spectral method for a first-kind integral equation in the logarithmic coordinate, which reproduces the exactly solvable cases to machine precision; the values have been reproduced by independently written code using different methods. A rigorous certificate is in preparation.
+The univalent Bloch–Landau constant $\mathcal U$ is the largest number such that the image of the unit disc under any univalent $f$ with $|f'(0)|=1$ contains a disc of radius $\mathcal U$. The best bound obtained from an explicit formula is $\mathcal U\le0.6563937$ (Carroll and Ortega-Cerdà, 2009); the best numerical value in the literature is $\mathcal U\le0.656319277$ (Ortega-Cerdà and Pridhnani, 2010), stated without rigorous error analysis. We describe an explicit disc with 24 slits whose ratio of inradius to conformal radius is, numerically, $0.656285866$. The conformal radius is computed by a spectral method for a first-kind integral equation in the logarithmic coordinate, which reproduces the exactly solvable cases to machine precision; the values have been reproduced by independently written code using different methods. A computer-assisted proof in ball arithmetic gives $\mathcal U\le0.65628589$ for this domain (Section 7; under audit).
 
 ## 1. Background
 
@@ -69,21 +69,25 @@ The condition $u=0$ on the arcs is a first-kind integral equation with logarithm
 * *Convergence.* For G the conformal radius is $1.523726248805$ for 64, 96 and 128 nodes per arc and after rotating the domain.
 * *A posteriori bound.* The computed function is harmonic with the correct pole and vanishes on the circle by construction, so by the maximum principle the error in $\log\rho$ is at most its largest absolute value on the slits; at 1501 points per slit not used in the collocation this is below $10^{-9}$ for G ($10^{-12}$ for A and B).
 * *Inradius.* Two grids give $1.0000000000$; a search over $3\times10^7$ random points of the whole disc finds no larger disc.
-* *Independent recomputation.* Separately written code, given only the statement of the claim, reproduced domain B (inradius at most $1+2\times10^{-7}$ by branch and bound; conformal radius $1.5236736470653$ by a boundary integral equation in the $z$-plane) and an earlier straight-slit domain (Schwarz–Christoffel parameter problem, nine digits). *(Domain G: in progress.)*
+* *Independent recomputation.* Separately written code, given only the statement of the claim, reproduced domain B (inradius at most $1+2\times10^{-7}$ by branch and bound; conformal radius $1.5236736470653$ by a boundary integral equation in the $z$-plane) and an earlier straight-slit domain (Schwarz–Christoffel parameter problem, nine digits). Domain G was reproduced in the same way: inradius between $1$ and $1+2	imes10^{-8}$ by branch and bound over the whole disc, conformal radius $1.5237262488052$ by the $z$-plane integral equation (stable under changes of panels, order and near-singular treatment, and under the substitution $\zeta=z^3$), smallest distance between slits $0.14842$. The scripts are in `referee/`.
 
 ## 6. Limitations
 
-* Double-precision floating point; not a proof. The same is true of the 2010 value we compare with.
+* The proof in Section 7 has been written and run but not yet checked by anyone other than its authoring tool; until it has been, the result should be described as numerical.
 * The domains are local optima of a low-dimensional family and do not satisfy the harmonic-symmetry condition necessary for an extremal domain.
 * Beller and Hummel's paper was not consulted directly.
 
-## 7. Towards a proof
+## 7. Computer-assisted proof
 
-*Inradius.* The distance to the boundary is 1-Lipschitz and is bounded above by the distance to any boundary point, so a branch-and-bound over the disc with outward-rounded arithmetic gives a rigorous bound $R(D)\le1+\varepsilon$.
+The argument and its error bounds are written out in `notes/CERTIFICATE.md`; the programs are in `certify/`. All trusted computations use ball arithmetic (Arb) or exact integer arithmetic, and the domain is defined by the decimal parameters of Section 2 read as exact rationals.
 
-*Conformal radius.* If $v$ is harmonic in $D\setminus\{0\}$, $v=-\log|z|+c+o(1)$ at $0$ and $v\le0$ on $\partial D$, then $\log\rho(D)\ge c$. Taking $v=u_h-\delta$ with $u_h$ the computed function (coefficients frozen as rationals) reduces the proof to a validated bound $\delta\ge\max_{\text{slits}}u_h$.
+*Inradius.* The distance to the boundary is at most the distance to any boundary point. A quadtree of about 4800 cells covers the sector $0\lerg z\le\pi/3$ of the disc, and for each cell a boundary point is exhibited within $1+10^{-9}$ of all four corners. Hence $R(D)\le1+10^{-9}$.
 
-A certified ratio below $0.6563937$ would improve the best proved bound; below $0.656319277$ it would also improve on the best numerical value.
+*Conformal radius.* If $v$ is harmonic in $D\setminus\{0\}$, $v=-\log|z|+c+o(1)$ at $0$ and $v\le0$ on $\partial D$, then $\logho(D)\ge c$. We take $v=U-\delta$, where $U$ is the function of Section 4 with the computed densities replaced by odd polynomials with rational coefficients; $U$ vanishes identically on the circle and has $c=\log R-rac\pi4\sum_ja_jc_{j,1}$ exactly. The bound $U\le\delta$ on the slits is proved by evaluating $U$ at Chebyshev nodes with rigorous quadrature remainders and bounding the interpolation error through the analyticity of $U$ along each slit; the required bounds for the kernels on complex neighbourhoods are obtained by branch and bound. For G this gives $\delta=2.66	imes10^{-8}$ and
+
+$$ho(D)\ge1.523726208330,\qquad	ext{hence}\qquad\mathcal U\lerac{1+10^{-9}}{1.523726208330}<0.65628589 .$$
+
+The same program, run on the two exactly solvable cases of Section 5, returns lower bounds $5.6	imes10^{-10}$ and $1.3	imes10^{-9}$ below the exact values. For domain B it gives $ho\ge1.523673641792$ and $\mathcal U<0.65630853$. The whole proof runs in under a minute.
 
 ## Code
 

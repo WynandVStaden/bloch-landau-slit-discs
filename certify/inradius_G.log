@@ -1,0 +1,33 @@
+design G: R = 5.001117628756668, 24 slits, EPS = 1e-09
+stage 1: quadtree search (floating point)
+  level  6: cell size 1.25e-01,     4078 leaves,      18 cells to split
+  level  7: cell size 6.25e-02,       54 leaves,      18 cells to split
+  level  8: cell size 3.12e-02,       56 leaves,      16 cells to split
+  level  9: cell size 1.56e-02,       49 leaves,      15 cells to split
+  level 10: cell size 7.81e-03,       47 leaves,      13 cells to split
+  level 11: cell size 3.91e-03,       37 leaves,      15 cells to split
+  level 12: cell size 1.95e-03,       45 leaves,      15 cells to split
+  level 13: cell size 9.77e-04,       46 leaves,      14 cells to split
+  level 14: cell size 4.88e-04,       43 leaves,      13 cells to split
+  level 15: cell size 2.44e-04,       38 leaves,      14 cells to split
+  level 16: cell size 1.22e-04,       41 leaves,      15 cells to split
+  level 17: cell size 6.10e-05,       48 leaves,      12 cells to split
+  level 18: cell size 3.05e-05,       37 leaves,      11 cells to split
+  level 19: cell size 1.53e-05,       33 leaves,      11 cells to split
+  level 20: cell size 7.63e-06,       32 leaves,      12 cells to split
+  level 21: cell size 3.81e-06,       35 leaves,      13 cells to split
+  level 22: cell size 1.91e-06,       42 leaves,      10 cells to split
+  level 23: cell size 9.54e-07,       29 leaves,      11 cells to split
+  level 24: cell size 4.77e-07,       34 leaves,      10 cells to split
+  level 25: cell size 2.38e-07,       31 leaves,       9 cells to split
+  level 26: cell size 1.19e-07,       28 leaves,       8 cells to split
+  level 27: cell size 5.96e-08,       24 leaves,       8 cells to split
+  level 28: cell size 2.98e-08,       26 leaves,       6 cells to split
+  level 29: cell size 1.49e-08,       19 leaves,       5 cells to split
+  level 30: cell size 7.45e-09,       15 leaves,       5 cells to split
+  level 31: cell size 3.73e-09,       18 leaves,       2 cells to split
+  level 32: cell size 1.86e-09,        8 leaves,       0 cells to split
+  4993 leaves in 0 s
+stage 2: exact verification of every leaf
+  outside disc 2799, outside sector 464, covered by a witness 1730 (610 distinct witnesses); 0 s
+CERTIFIED: inradius of design G <= 1 + 1e-09
