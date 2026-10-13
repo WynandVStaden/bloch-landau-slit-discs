@@ -64,8 +64,10 @@ I = acb(0, 1)
 
 
 def up(x):
-    """A float that is certainly >= the Arb number x."""
-    return float(x.upper()) * (1 + 2.0**-40) + 1e-300
+    """A float that is certainly >= the Arb number x (x must be non-negative)."""
+    v = float(x.upper())
+    assert v >= 0
+    return v * (1 + 2.0**-40) + 1e-300
 
 
 class Geometry:
@@ -132,7 +134,7 @@ def bound_abs(func, box, scale, ratio=4.0, min_width=1e-7, max_boxes=400000):
         count += 1
         if count > max_boxes:
             return None
-        balls = [arb((lo + hi) / 2, (hi - lo) / 2 * (1 + 2.0**-30)) if hi > lo else arb(lo) for lo, hi in bx]
+        balls = [arb(lo).union(arb(hi)) for lo, hi in bx]  # exact endpoints, so the ball contains the interval
         v = func(acb(balls[0], balls[1]), acb(balls[2], balls[3]))
         lo, hi = v.abs_lower(), v.abs_upper()
         if lo > 0 and hi < ratio * lo:
@@ -222,7 +224,7 @@ def plan(geo, coef, log=print):
                 break
             b /= 2
         rho = rho_of(b) * (1 - 1e-12)
-        lam = [math.pi * math.log(2)] + [math.pi / n for n in range(1, deg + 1)]
+        lam = [math.pi * math.log(2)] + [math.pi / n for n in range(1, max(len(c) for c in coef.values()) + 1)]
         big_b += geo.fa[i] * (1 + 1e-12) * a_half
         big_b += sum(abs(v) * lam[n] * (rho**n + rho**-n) / 2 for n, v in enumerate(coef[geo.cls[i]])) * (1 + 1e-9)
         big_b *= 1 + 1e-9
@@ -354,9 +356,11 @@ def certify(name, n, processes, log=print):
     c1 = arb(0)
     for j in range(geo.n_slits):
         c1 += geo.a[j] * arb(coef[geo.cls[j]][1])
+    assert delta >= 0
     log_rho_lower = geo.big_l - arb.pi() / 4 * c1 - delta
     rho_lower = log_rho_lower.exp()
-    lower = float(rho_lower.lower()) * (1 - 2.0**-40)
+    lower = math.floor(float(rho_lower.lower()) * (1 - 2.0**-40) * 1e12) / 1e12  # rounded down to 12 decimals
+    assert arb(lower) < rho_lower
     log(f"delta = {up(delta):.3e}")
     log(f"CERTIFIED: conformal radius of design {name} >= {lower:.12f}   (floating-point value {rho_float:.12f}); "
         f"total time {time.time() - t_start:.0f} s")

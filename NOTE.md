@@ -73,7 +73,7 @@ The condition $u=0$ on the arcs is a first-kind integral equation with logarithm
 
 ## 6. Limitations
 
-* The proof in Section 7 has been written and run but not yet checked by anyone other than its authoring tool; until it has been, the result should be described as numerical.
+* The proof in Section 7 has been audited by a separate AI reviewer (no fatal defect; scripts in `referee/certificate_audit/`) but not yet by a human; it also relies on the correctness of the Arb library.
 * The domains are local optima of a low-dimensional family and do not satisfy the harmonic-symmetry condition necessary for an extremal domain.
 * Beller and Hummel's paper was not consulted directly.
 
@@ -81,11 +81,11 @@ The condition $u=0$ on the arcs is a first-kind integral equation with logarithm
 
 The argument and its error bounds are written out in `notes/CERTIFICATE.md`; the programs are in `certify/`. All trusted computations use ball arithmetic (Arb) or exact integer arithmetic, and the domain is defined by the decimal parameters of Section 2 read as exact rationals.
 
-*Inradius.* The distance to the boundary is at most the distance to any boundary point. A quadtree of about 4800 cells covers the sector $0\le\arg z\le\pi/3$ of the disc, and for each cell a boundary point is exhibited within $1+10^{-9}$ of all four corners. Hence $R(D)\le1+10^{-9}$.
+*Inradius.* The distance to the boundary is at most the distance to any boundary point. A quadtree of 4993 cells covers the sector $0\le\arg z\le\pi/3$ of the disc, and for each cell a boundary point is exhibited within $1+10^{-9}$ of all four corners. Hence $R(D)\le1+10^{-9}$.
 
 *Conformal radius.* If $v$ is harmonic in $D\setminus\{0\}$, $v=-\log|z|+c+o(1)$ at $0$ and $v\le0$ on $\partial D$, then $\log\rho(D)\ge c$. We take $v=U-\delta$, where $U$ is the function of Section 4 with the computed densities replaced by odd polynomials with rational coefficients; $U$ vanishes identically on the circle and has $c=\log R-\frac\pi4\sum_ja_jc_{j,1}$ exactly. The bound $U\le\delta$ on the slits is proved by evaluating $U$ at Chebyshev nodes with rigorous quadrature remainders and bounding the interpolation error through the analyticity of $U$ along each slit; the required bounds for the kernels on complex neighbourhoods are obtained by branch and bound. For G this gives $\delta=2.66\times10^{-8}$ and
 
-$$\rho(D)\ge1.523726208330,\qquad\text{hence}\qquad\mathcal U\le\frac{1+10^{-9}}{1.523726208330}<0.65628589 .$$
+$$\rho(D)\ge1.523726208329,\qquad\text{hence}\qquad\mathcal U\le\frac{1+10^{-9}}{1.523726208329}<0.65628589 .$$
 
 The same program, run on the two exactly solvable cases of Section 5, returns lower bounds $5.6\times10^{-10}$ and $1.3\times10^{-9}$ below the exact values. For domain B it gives $\rho\ge1.523673641792$ and $\mathcal U<0.65630853$. The whole proof runs in under a minute.
 

@@ -28,6 +28,10 @@ Stage 2 (trusted): every leaf is re-checked.
      (c) as |corner - q'|^2 <= (1 + EPS - 2^-69)^2, all in exact integer
      arithmetic.
 
+EPS is the double nearest to the number typed (1e-9 as a double exceeds 10^-9 by
+6e-26); the 2^-69 slack is far larger than the actual witness rounding error, so
+the bound with the decimal value holds as well.
+
 Usage: python inradius_certificate.py [design letter, default G] [EPS, default 1e-7]
 """
 import sys
@@ -168,7 +172,7 @@ def verify(big_r, slits, eps, cells, pars):
     assert area == 1, f"leaves do not have the area of the root square (got {area})"
     for (lv, ix, iy, code, kind, j), par in zip(cells.tolist(), pars.tolist()):
         shift = SCALE_BITS + 3 - lv  # cell size = 8 / 2^lv = 2^(3 - lv)
-        assert shift >= 0
+        assert shift >= 0 and 0 <= ix < (1 << lv) and 0 <= iy < (1 << lv), "cell outside the root square"
         x0, y0 = ix << shift, iy << shift
         x1, y1 = x0 + (1 << shift), y0 + (1 << shift)
         if code == 0:

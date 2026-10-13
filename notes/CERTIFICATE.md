@@ -23,7 +23,9 @@ By symmetry it is enough to treat $p$ in the sector $0\le\arg p\le60^\circ$, $|p
 
 The cells' corners are dyadic rationals; the witness is enclosed to $2^{-69}$ by ball arithmetic and the comparisons are done in exact integer arithmetic. The program also checks that the cells tile the square (no cell contains another, areas add up to that of the square).
 
-Result (2026-10-13): $R(D)\le1+10^{-9}$ for G and for B, with about 4800 cells each.
+Result (2026-10-13): $R(D)\le1+10^{-9}$ for G and for B, with 4993 cells for G.
+
+An independent audit of both programs and of the argument below (2026-10-13, scripts in `referee/certificate_audit/`) found no fatal defect; the repairs it asked for (exact box endpoints in the branch-and-bound, a range check on the cells, rounding the printed bound downwards, and the clarifications marked in the text) have been made.
 
 ## 2. Conformal radius
 
@@ -45,16 +47,16 @@ the slit itself being $-1\le x\le0$. Let $\psi_j$ be *odd* polynomials with rati
 $$U(w)=(L-\operatorname{Re}w)+\sum_j\int_{-1}^1\Phi\big(w-w_j(y)\big)\psi_j(y)\frac{dy}{\sqrt{1-y^2}},\qquad\Phi(w)=-\log\big|2\sinh\tfrac w2\big| .$$
 The following hold exactly, whatever the coefficients are:
 
-* $U$ is $2\pi i$-periodic, so it is a function of $z$; it is harmonic in $D\setminus\{0\}$ (the mirror halves of the arcs lie outside the disc) and continuous.
+* $U$ is $2\pi i$-periodic, so it is a function of $z$; it is harmonic in $D\setminus\{0\}$ (the mirror halves of the arcs lie outside the disc) and continuous, including at the slit tips (the logarithmic potential of $T_n(y)/\sqrt{1-y^2}$ is continuous across the endpoints).
 * $U=0$ on $|z|=R$: the reflection $w\mapsto2L-\bar w$ maps $w_j(x)$ to $w_j(-x)$, and $\psi_j$ is odd, so $U$ is odd under the reflection.
 * As $\operatorname{Re}w\to-\infty$, $\Phi(w-w')=\tfrac12\operatorname{Re}(w-w')+o(1)$, and $\int\psi_j\,dy/\sqrt{1-y^2}=0$, $\int y\,\psi_j\,dy/\sqrt{1-y^2}=\tfrac\pi2c_{j,1}$, so
 $$U=-\log|z|+c+o(1),\qquad c=L-\frac\pi4\sum_ja_jc_{j,1}.$$
 
 Hence, by the Lemma applied to $v=U-\delta$:
-$$\boxed{\ \log\rho(D)\ \ge\ L-\frac\pi4\sum_ja_jc_{j,1}-\delta\qquad\text{whenever }U\le\delta\text{ on every slit.}\ }$$
+$$\boxed{\ \log\rho(D)\ \ge\ L-\frac\pi4\sum_ja_jc_{j,1}-\delta\qquad\text{whenever }\delta\ge0\text{ and }U\le\delta\text{ on every slit.}\ }$$
 The coefficients come from the floating-point solver, rounded to doubles; if they were poor the only consequence would be a large $\delta$.
 
-Note that the proof does not need the slits to be disjoint: $D$ can be read as the component of $0$ in the disc minus the slits.
+Note that the proof does not need the slits to be disjoint: $D$ can be read as the component of $0$ in the disc minus the slits, which is simply connected in any case because every slit is attached to the circle. (An independent check found the slits pairwise disjoint, at distance at least $0.1484$.)
 
 ### 2.3 Bounding $U$ on a slit
 
@@ -64,11 +66,11 @@ By symmetry one slit per class is enough. Put $f(x)=U(w_i(x))$ for $-1\le x\le1$
 $$\Phi\big(w_i(x)-w_i(y)\big)=-\log|x-y|-\log|K_i(x,y)|,\qquad K_i(x,y)=\frac{2\sinh\frac{w_i(x)-w_i(y)}2}{x-y},$$
 and $\int_{-1}^1-\log|x-y|\,T_n(y)\,dy/\sqrt{1-y^2}=\frac\pi nT_n(x)$ exactly ($n\ge1$). All remaining integrals have the form $\int\operatorname{Re}h(y)\,\psi(y)\,dy/\sqrt{1-y^2}$ with $h=\log(\text{kernel})$ analytic near $[-1,1]$, and are computed by the $N$-point Gauss–Chebyshev rule with the remainder bound below.
 
-**Lemma (coefficients from the real part).** Let $h$ be analytic in a neighbourhood of the closed Bernstein ellipse $E_r$ (foci $\pm1$, semi-axes $\frac12(r\pm r^{-1})$) and $|\operatorname{Re}h|\le A$ on it. Then the Chebyshev coefficients $\alpha_k$ of the real function $\operatorname{Re}h$ on $[-1,1]$ satisfy $|\alpha_k|\le4A/(r^k+r^{-k})$.
+**Lemma (coefficients from the real part).** Let $h$ be analytic in a neighbourhood of the closed Bernstein ellipse $E_r$ (foci $\pm1$, semi-axes $\frac12(r\pm r^{-1})$) and $|\operatorname{Re}h|\le A$ on its boundary. Then the Chebyshev coefficients $\alpha_k$ of the real function $\operatorname{Re}h$ on $[-1,1]$ satisfy $|\alpha_k|\le4A/(r^k+r^{-k})$.
 
 *Proof.* With $x=\frac12(u+u^{-1})$, $h$ becomes a Laurent series $\sum b_ku^k$ with $b_{-k}=b_k$, and $\alpha_k=2\operatorname{Re}b_k$. The $k$-th Fourier coefficient of $\operatorname{Re}h$ on $|u|=r$ is $\frac12(b_kr^k+\bar b_kr^{-k})$, of modulus at most $A$, and its real part is $\frac12\operatorname{Re}b_k\,(r^k+r^{-k})$. ∎
 
-Only $|\operatorname{Re}h|=\big|\log|\text{kernel}|\big|$ is needed, so it suffices to bound the modulus of the kernel above and below (away from $0$) on a rectangle containing the ellipse. This is done by branch-and-bound in ball arithmetic; the lower bound also proves that the logarithm is analytic there.
+Only $|\operatorname{Re}h|=\big|\log|\text{kernel}|\big|$ is needed, so it suffices to bound the modulus of the kernel above and below (away from $0$) on a rectangle containing the ellipse. This is done by branch-and-bound in ball arithmetic; the lower bound also proves that the kernel does not vanish on the simply connected set (rectangle) $\times[-1,1]$, so it has a single-valued logarithm there, continuous in both variables and analytic in the complex one.
 
 **Quadrature remainder.** The rule is exact for polynomials of degree $<2N$. Splitting $\operatorname{Re}h$ at degree $K=2N-1-\deg\psi$,
 $$\Big|\int-\text{rule}\Big|\le2\pi\,\|\psi\|_\infty\sum_{k>K}|\alpha_k|\le\frac{8\pi A\|\psi\|_\infty}{r-1}\,r^{-K}.$$

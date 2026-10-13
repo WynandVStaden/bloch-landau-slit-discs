@@ -11,4 +11,4 @@ planning (branch-and-bound proofs of the kernel bounds):
   slit 12 (class 3): max |f| at nodes <= 4.380e-10, sum of |coefficients| <= 2.773e-09, interpolation remainder <= 9.8e-10; sup |U| <= 3.758e-09   [2 s]
   slit 18 (class 4): max |f| at nodes <= 1.812e-12, sum of |coefficients| <= 1.016e-10, interpolation remainder <= 6.5e-10; sup |U| <= 7.478e-10   [0 s]
 delta = 2.656e-08
-CERTIFIED: conformal radius of design G >= 1.523726208330   (floating-point value 1.523726248805); total time 19 s
+CERTIFIED: conformal radius of design G >= 1.523726208329   (floating-point value 1.523726248805); total time 19 s
