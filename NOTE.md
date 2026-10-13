@@ -81,13 +81,13 @@ The condition $u=0$ on the arcs is a first-kind integral equation with logarithm
 
 The argument and its error bounds are written out in `notes/CERTIFICATE.md`; the programs are in `certify/`. All trusted computations use ball arithmetic (Arb) or exact integer arithmetic, and the domain is defined by the decimal parameters of Section 2 read as exact rationals.
 
-*Inradius.* The distance to the boundary is at most the distance to any boundary point. A quadtree of about 4800 cells covers the sector $0\lerg z\le\pi/3$ of the disc, and for each cell a boundary point is exhibited within $1+10^{-9}$ of all four corners. Hence $R(D)\le1+10^{-9}$.
+*Inradius.* The distance to the boundary is at most the distance to any boundary point. A quadtree of about 4800 cells covers the sector $0\le\arg z\le\pi/3$ of the disc, and for each cell a boundary point is exhibited within $1+10^{-9}$ of all four corners. Hence $R(D)\le1+10^{-9}$.
 
-*Conformal radius.* If $v$ is harmonic in $D\setminus\{0\}$, $v=-\log|z|+c+o(1)$ at $0$ and $v\le0$ on $\partial D$, then $\logho(D)\ge c$. We take $v=U-\delta$, where $U$ is the function of Section 4 with the computed densities replaced by odd polynomials with rational coefficients; $U$ vanishes identically on the circle and has $c=\log R-rac\pi4\sum_ja_jc_{j,1}$ exactly. The bound $U\le\delta$ on the slits is proved by evaluating $U$ at Chebyshev nodes with rigorous quadrature remainders and bounding the interpolation error through the analyticity of $U$ along each slit; the required bounds for the kernels on complex neighbourhoods are obtained by branch and bound. For G this gives $\delta=2.66	imes10^{-8}$ and
+*Conformal radius.* If $v$ is harmonic in $D\setminus\{0\}$, $v=-\log|z|+c+o(1)$ at $0$ and $v\le0$ on $\partial D$, then $\log\rho(D)\ge c$. We take $v=U-\delta$, where $U$ is the function of Section 4 with the computed densities replaced by odd polynomials with rational coefficients; $U$ vanishes identically on the circle and has $c=\log R-\frac\pi4\sum_ja_jc_{j,1}$ exactly. The bound $U\le\delta$ on the slits is proved by evaluating $U$ at Chebyshev nodes with rigorous quadrature remainders and bounding the interpolation error through the analyticity of $U$ along each slit; the required bounds for the kernels on complex neighbourhoods are obtained by branch and bound. For G this gives $\delta=2.66\times10^{-8}$ and
 
-$$ho(D)\ge1.523726208330,\qquad	ext{hence}\qquad\mathcal U\lerac{1+10^{-9}}{1.523726208330}<0.65628589 .$$
+$$\rho(D)\ge1.523726208330,\qquad\text{hence}\qquad\mathcal U\le\frac{1+10^{-9}}{1.523726208330}<0.65628589 .$$
 
-The same program, run on the two exactly solvable cases of Section 5, returns lower bounds $5.6	imes10^{-10}$ and $1.3	imes10^{-9}$ below the exact values. For domain B it gives $ho\ge1.523673641792$ and $\mathcal U<0.65630853$. The whole proof runs in under a minute.
+The same program, run on the two exactly solvable cases of Section 5, returns lower bounds $5.6\times10^{-10}$ and $1.3\times10^{-9}$ below the exact values. For domain B it gives $\rho\ge1.523673641792$ and $\mathcal U<0.65630853$. The whole proof runs in under a minute.
 
 ## Code
 
