@@ -93,7 +93,7 @@ Only the two programs in `certify/` are part of the proof. Everything else is ho
 
 ## AI disclosure
 
-The search, the numerical method, the code, the proof, the literature review and the drafts in this repository were produced by an AI system (Claude, Anthropic) working at the author's direction. The independent checks were made by separate instances of the same system. The author, Wynand van Staden, directed the work, proposed the evolutionary search, and is responsible for the results.
+This project was initiated and directed throughout by the author, Wynand van Staden, who set its goal, proposed the evolutionary search, and called for the rigorous certificate and the independent checks. Under that direction, the search, the numerical method, the code, the proof, the literature review and the drafts in this repository were produced by an AI system (Claude, Anthropic). The independent checks were made by separate instances of the same system. The author is responsible for the results.
 
 ## Licence
 
