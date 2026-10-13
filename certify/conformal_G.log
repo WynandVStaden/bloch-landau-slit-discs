@@ -1,3 +1,4 @@
+density coefficients computed by the floating-point solver and written to density_G_n64.json
 design G: 24 slits, solver size n = 64; floating-point conformal radius 1.523726248805
 planning (branch-and-bound proofs of the kernel bounds):
   slit 0 (class 0, a = 1.6097): rho = 1.00934, B = 9.4, 3196 interpolation nodes, quadrature nodes 79..2225, 1.00e+07 kernel evaluations; planned in 1 s
@@ -11,4 +12,5 @@ planning (branch-and-bound proofs of the kernel bounds):
   slit 12 (class 3): max |f| at nodes <= 4.380e-10, sum of |coefficients| <= 2.773e-09, interpolation remainder <= 9.8e-10; sup |U| <= 3.758e-09   [2 s]
   slit 18 (class 4): max |f| at nodes <= 1.812e-12, sum of |coefficients| <= 1.016e-10, interpolation remainder <= 6.5e-10; sup |U| <= 7.478e-10   [0 s]
 delta = 2.656e-08
+c = L - (pi/4) sum a_j c_j1 = 0.4211588143614
 CERTIFIED: conformal radius of design G >= 1.523726208329   (floating-point value 1.523726248805); total time 19 s

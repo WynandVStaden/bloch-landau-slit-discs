@@ -42,6 +42,7 @@ Usage: python conformal_certificate.py [design, default G] [n, default 64] [proc
 """
 import json
 import math
+import os
 import sys
 import time
 from fractions import Fraction
@@ -323,7 +324,19 @@ def certify(name, n, processes, log=print):
     ctx.prec = PREC
     t_start = time.time()
     geo = Geometry(name)
-    coef, rho_float = make_density(geo, n)
+    # The density is frozen in a data file so that the proof does not depend on the floating-point solver:
+    # the argument is valid for ANY odd coefficients; they only influence how small delta comes out.
+    density_file = f"density_{name}_n{n}.json"
+    if os.path.exists(density_file):
+        with open(density_file) as fh:
+            stored = json.load(fh)
+        coef, rho_float = {int(c): v for c, v in stored["coefficients"].items()}, stored["floating_point_conformal_radius"]
+        log(f"density coefficients read from {density_file}")
+    else:
+        coef, rho_float = make_density(geo, n)
+        with open(density_file, "w") as fh:
+            json.dump({"design": name, "n": n, "coefficients": coef, "floating_point_conformal_radius": rho_float}, fh, indent=1)
+        log(f"density coefficients computed by the floating-point solver and written to {density_file}")
     log(f"design {name}: {geo.n_slits} slits, solver size n = {n}; floating-point conformal radius {rho_float:.12f}")
     log("planning (branch-and-bound proofs of the kernel bounds):")
     pl = plan(geo, coef, log)
@@ -362,6 +375,7 @@ def certify(name, n, processes, log=print):
     lower = math.floor(float(rho_lower.lower()) * (1 - 2.0**-40) * 1e12) / 1e12  # rounded down to 12 decimals
     assert arb(lower) < rho_lower
     log(f"delta = {up(delta):.3e}")
+    log(f"c = L - (pi/4) sum a_j c_j1 = {float((geo.big_l - arb.pi() / 4 * c1).mid()):.13f}")
     log(f"CERTIFIED: conformal radius of design {name} >= {lower:.12f}   (floating-point value {rho_float:.12f}); "
         f"total time {time.time() - t_start:.0f} s")
     with open(f"conformal_certificate_{name}.json", "w") as fh:

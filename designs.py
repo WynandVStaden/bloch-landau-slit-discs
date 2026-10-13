@@ -1,4 +1,4 @@
-"""The domains reported in the note; recomputes their ratios and draws them.
+"""The three domains A, B and G (G is the domain of the paper); recomputes their ratios and draws them.
 
 A slit is, in the coordinate w = log z,
     w(x) = log R + s + i (alpha + b1 s^2 + b2 s^4),   s = a x,  -1 <= x <= 0,  a = log(R / tip),

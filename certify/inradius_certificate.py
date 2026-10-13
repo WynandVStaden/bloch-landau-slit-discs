@@ -28,12 +28,12 @@ Stage 2 (trusted): every leaf is re-checked.
      (c) as |corner - q'|^2 <= (1 + EPS - 2^-69)^2, all in exact integer
      arithmetic.
 
-EPS is the double nearest to the number typed (1e-9 as a double exceeds 10^-9 by
-6e-26); the 2^-69 slack is far larger than the actual witness rounding error, so
-the bound with the decimal value holds as well.
+EPS is read as an exact decimal number in stage 2 (for example 1e-9 is exactly
+10^-9); stage 1 uses its floating-point value, which does not matter.
 
-Usage: python inradius_certificate.py [design letter, default G] [EPS, default 1e-7]
+Usage: python inradius_certificate.py [design letter, default G] [EPS, default 1e-9]
 """
+import math
 import sys
 import time
 from fractions import Fraction
@@ -124,8 +124,8 @@ def search(big_r, slits, eps, spacing=2e-4, max_level=44):
                 leaves.append(par[k[m]])
         ix, iy = ix[~done], iy[~done]
         print(f"  level {level:2d}: cell size {size:.2e}, {done.sum():8d} leaves, {len(ix):7d} cells to split", flush=True)
-        if level == max_level and len(ix):
-            raise SystemExit("search failed: cells remain at the maximum depth; EPS is too small for this domain")
+        if len(ix) and (level == max_level or len(ix) > 2_000_000):
+            raise SystemExit("NOT CERTIFIED: the search could not cover the domain; EPS is too small for this domain")
         ix = np.concatenate([2 * ix, 2 * ix + 1, 2 * ix, 2 * ix + 1])
         iy = np.concatenate([2 * iy, 2 * iy, 2 * iy + 1, 2 * iy + 1])
         level += 1
@@ -162,7 +162,7 @@ def witness_point(big_r, slits, kind, j, par):
 def verify(big_r, slits, eps, cells, pars):
     ctx.prec = 160
     one = 1 << SCALE_BITS
-    limit = one + int(eps * one) - (1 << (SCALE_BITS - ETA_BITS))  # (1 + eps - 2^-69), scaled, rounded down
+    limit = one + math.floor(eps * one) - (1 << (SCALE_BITS - ETA_BITS))  # (1 + eps - 2^-69), scaled, rounded down
     limit2 = limit * limit
     r2_num, r2_den = (big_r * big_r).numerator, (big_r * big_r).denominator
     cache, counts = {}, [0, 0, 0]
@@ -205,7 +205,9 @@ def no_overlap(cells):
 
 if __name__ == "__main__":
     name = sys.argv[1] if len(sys.argv) > 1 else "G"
-    eps = float(sys.argv[2]) if len(sys.argv) > 2 else 1e-7
+    eps_text = sys.argv[2] if len(sys.argv) > 2 else "1e-9"
+    eps = float(eps_text)  # for the search only
+    eps_exact = Fraction(eps_text)  # the number in the statement that is proved
     big_r = Fraction(DESIGNS[name][0])
     slits = slit_table(DESIGNS[name][1])
     assert big_r < ROOT
@@ -218,7 +220,8 @@ if __name__ == "__main__":
     t = time.time()
     print("stage 2: exact verification of every leaf")
     no_overlap(cells)
-    counts, n_wit = verify(big_r, slits, Fraction(eps), cells, pars)
+    counts, n_wit = verify(big_r, slits, eps_exact, cells, pars)
     print(f"  outside disc {counts[0]}, outside sector {counts[1]}, covered by a witness {counts[2]} "
           f"({n_wit} distinct witnesses); {time.time() - t:.0f} s")
-    print(f"CERTIFIED: inradius of design {name} <= 1 + {eps}")
+    print(f"  smallest cell side 2^{3 - int(cells[:, 0].max())}")
+    print(f"CERTIFIED: inradius of design {name} <= 1 + {eps_text}")

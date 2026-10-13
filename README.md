@@ -1,35 +1,100 @@
-# Univalent Bloch–Landau constant: slit-disc upper bounds
+# An improved upper bound for the univalent Bloch–Landau constant
 
-**Private working repository. Nothing here has been submitted or published.**
+> **Status: private draft, not submitted or published.** The proof has been audited by an AI reviewer but not yet by a human mathematician. Please do not circulate.
 
-Numerical evidence that the univalent Bloch–Landau constant satisfies U ≤ 0.656285866, against the best proved bound 0.6563937 (Carroll and Ortega-Cerdà, 2009) and the best published numerical value 0.656319277 (Ortega-Cerdà and Pridhnani, 2010). A computer-assisted proof (ball arithmetic) of U ≤ 0.65628589 is in `certify/`; it runs in under a minute and is **still being audited**.
+This repository contains a slit domain, a computer-assisted proof, and all the code behind the bound
 
-| File | Purpose |
+**U ≤ 0.65628589**
+
+for the univalent Bloch–Landau constant U. For comparison:
+
+| | Upper bound for U | Nature |
+|---|---|---|
+| Carroll and Ortega-Cerdà (2009) | 0.6563937 | proved (closed formula) |
+| Ortega-Cerdà and Pridhnani (2010) | 0.656319277 | numerical, no error analysis |
+| **This repository** | **0.65628589** | computer-assisted proof |
+
+![The domain](domain_G.png)
+
+*The domain: a disc of radius 5.0011 with 24 slits. The dashed circle is a largest inscribed disc (radius 1).*
+
+## What the constant is
+
+Take any simply connected plane domain D containing 0. It has two sizes:
+
+- **R(D)**, the inradius: the radius of the largest disc that fits inside D;
+- **ρ(D)**, the conformal radius at 0: the size of D as felt from the point 0 (see the [primer](docs/PRIMER.md)).
+
+The constant U is the smallest possible value of R(D) / ρ(D). Every explicit domain therefore gives an upper bound for U. The domain above has R ≤ 1 + 10⁻⁹ and ρ ≥ 1.523726208329.
+
+## Where to start
+
+| If you want to… | Read |
 |---|---|
-| `NOTE.md` | draft write-up |
-| `notes/WALKTHROUGH.md` | the method step by step, and how to run every check |
-| `notes/LESSONS.md` | the mathematics from the basics |
-| `notes/LITERATURE.md` | earlier bounds, searches done, possible venues |
-| `designs.py` | the domains A, B and G; recomputes their ratios and draws `domains.png` |
-| `bloch_solver.py` | conformal radius of a slit disc (spectral integral-equation method); self-test against exact formulas |
-| `bloch_explicit.py` | exact conformal radius for six slits on the symmetry axes |
-| `bloch_design.py`, `bloch_curved.py`, `bloch_curved2.py` | inradius for straight slits, one-bend slits and two-parameter curved slits |
-| `bloch_verify.py`, `bloch_verify_curved.py`, `bloch_verify_curved2.py` | checks of a domain (brute force, convergence, rotation) |
-| `bloch_residual.py` | a posteriori error bound for the conformal radius |
-| `bloch_evolve.py`, `bloch_evolve2.py` | the differential-evolution searches |
-| `certify/inradius_certificate.py` | proof that the inradius is at most 1 + 1e-9 |
-| `certify/conformal_certificate.py` | proof of a lower bound for the conformal radius (try `ONE` and `R6` first: exactly solvable tests) |
-| `notes/CERTIFICATE.md` | the mathematics of the certificate |
-| `referee/` | scripts written by independent reviewers |
-| `logs/` | search and verification logs |
+| see the theorem and its complete proof | [`paper/bloch_slit_discs.pdf`](paper/bloch_slit_discs.pdf) |
+| understand the problem and the method without much background | [`docs/PRIMER.md`](docs/PRIMER.md) |
+| re-run the proof and every numerical check yourself | [`docs/REPRODUCING.md`](docs/REPRODUCING.md) |
+| see the earlier results and what was searched | [`docs/LITERATURE.md`](docs/LITERATURE.md) |
 
-Requirements: Python 3 with numpy, scipy, matplotlib (`certify/` also needs python-flint).
+## Quick start
+
+Requires Python 3.10 or later.
 
 ```
-python designs.py
+python -m venv .venv
+.venv\Scripts\activate          (Windows)      source .venv/bin/activate   (Linux, macOS)
+pip install -r requirements.txt
+```
+
+Run the proof (about one minute in total):
+
+```
 cd certify
 python inradius_certificate.py G 1e-9
 python conformal_certificate.py G 64
 ```
 
-Prepared with AI assistance (Claude); see the disclosure in `NOTE.md`.
+Expected last lines:
+
+```
+CERTIFIED: inradius of design G <= 1 + 1e-9
+CERTIFIED: conformal radius of design G >= 1.523726208329
+```
+
+and (1 + 10⁻⁹) / 1.523726208329 < 0.65628589.
+
+## Repository layout
+
+| Path | Contents |
+|---|---|
+| `paper/` | the paper: LaTeX source and PDF |
+| `certify/` | **the proof**: two programs, their logs and data files |
+| `certify/inradius_certificate.py` | proves R(D) ≤ 1 + 10⁻⁹ (exact integer arithmetic) |
+| `certify/conformal_certificate.py` | proves ρ(D) ≥ 1.523726208329 (ball arithmetic) |
+| `certify/density_G_n64.json` | the coefficients used by the conformal-radius proof |
+| `designs.py` | the three domains A, B, G: recomputes their ratios in floating point and draws them |
+| `bloch_solver.py` | conformal radius of a slit disc (floating point); run it to see the self-test |
+| `bloch_explicit.py` | exact conformal radius of the classical six-slit disc |
+| `bloch_design.py`, `bloch_curved.py`, `bloch_curved2.py` | inradius routines and search objectives for straight, one-bend and two-bend slits |
+| `bloch_evolve.py`, `bloch_evolve2.py` | differential-evolution searches (`bloch_curved2.py` contains the one that found G) |
+| `bloch_verify*.py`, `bloch_residual.py` | floating-point cross-checks of a domain |
+| `referee/` | scripts written by independent reviewers (different methods, no shared code) |
+| `logs/` | logs of the searches and checks |
+| `docs/` | primer, reproduction guide, literature notes |
+
+Only the two programs in `certify/` are part of the proof. Everything else is how the domain was found and cross-checked.
+
+## What is and is not established
+
+- **Proved by the programs in `certify/`:** U ≤ 0.65628589. The argument is written out in the paper. It relies on the [Arb](https://flintlib.org) library (now part of FLINT, used through python-flint) for ball arithmetic and on Python's integer arithmetic.
+- **Checked independently:** the inradius and conformal radius were recomputed by separately written code using different methods (`referee/`), and the proof and its programs were audited by a separate AI reviewer (`referee/certificate_audit/`), who found no fatal defect.
+- **Not yet done:** review by a human expert; consulting Beller and Hummel's 1985 paper directly; a final literature check before submission.
+- **Not claimed:** optimality. The domain is a local optimum of a small family.
+
+## AI disclosure
+
+The search, the numerical method, the code, the proof, the literature review and the drafts in this repository were produced by an AI system (Claude, Anthropic) working at the author's direction. The independent checks were made by separate instances of the same system. The author, Wynand van Staden, directed the work, proposed the evolutionary search, and is responsible for the results.
+
+## Licence
+
+No licence has been granted yet; all rights reserved until publication.

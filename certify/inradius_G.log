@@ -30,4 +30,5 @@ stage 1: quadtree search (floating point)
   4993 leaves in 0 s
 stage 2: exact verification of every leaf
   outside disc 2799, outside sector 464, covered by a witness 1730 (610 distinct witnesses); 0 s
-CERTIFIED: inradius of design G <= 1 + 1e-09
+  smallest cell side 2^-29
+CERTIFIED: inradius of design G <= 1 + 1e-9
