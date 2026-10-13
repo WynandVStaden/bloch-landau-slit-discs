@@ -93,7 +93,7 @@ Only the two programs in `certify/` are part of the proof. Everything else is ho
 
 ## AI disclosure
 
-The domain, the numerical method, the programs, the proof and the documents in this repository were produced with the help of an AI system (Claude, Anthropic), under the direction of the author, Wynand van Staden, throughout. The author has re-run the computations and checked the argument, and takes full responsibility for the results.
+The domain, the numerical method, the programs, the proof and the documents in this repository were produced with the help of an AI system (Claude, Anthropic), under the direction of the author, Wynand van Staden, throughout.
 
 ## Licence
 
