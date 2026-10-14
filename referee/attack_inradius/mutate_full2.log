@@ -1,0 +1,5 @@
+R -> 5.0012                                                eps=1e-9     expect ?         -> CERTIFIED (4738 leaves, max level 31)
+class2 b1 -> 0.9027 (tip rotates by 2.7e-6 rad)            eps=1e-9     expect ?         -> CERTIFIED (4804 leaves, max level 31)
+class2 b1 -> 0.9026 (tip rotates the other way)            eps=1e-9     expect ?         -> refused: NOT CERTIFIED: the search could not cover the domain; EPS is
+class3 theta -> 1.0158                                     eps=1e-9     expect ?         -> refused: NOT CERTIFIED: the search could not cover the domain; EPS is
+class3 theta -> 1.0156                                     eps=1e-9     expect ?         -> CERTIFIED (4801 leaves, max level 31)

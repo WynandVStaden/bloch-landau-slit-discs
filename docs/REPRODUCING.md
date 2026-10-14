@@ -45,7 +45,8 @@ python conformal_certificate.py G 64
 The second argument is the number of coefficients per slit; a third optional argument sets the number of processes (default 8). Expected last lines:
 
 ```
-delta = 2.656e-08
+delta <= 2.6563e-08   (sup of U over the slits)
+c = L - (pi/4) sum a_j c_j1 >= 0.4211588143613
 CERTIFIED: conformal radius of design G >= 1.523726208329
 ```
 
@@ -125,6 +126,10 @@ The folder `referee/` contains programs written independently of the main code, 
 | `referee/B_18_slits/` | domain B, in the same way | as above |
 | `referee/straight_18_slits/` | an earlier straight-slit domain | Schwarz–Christoffel parameter problem |
 | `referee/certificate_audit/` | the proof and the two certificate programs | re-derivation, perturbation attacks, independent high-precision evaluation |
+| `referee/attack_rho/` | the conformal radius, from the description of the domain only | three boundary-integral solvers, one in 34-digit arithmetic (value 1.523726248805208911047994), and a random-walk estimate |
+| `referee/attack_inradius/` | the inradius and its certificate | 50-digit search for all locally largest discs; an independent exact verifier of the stored covering; mutation tests |
+| `referee/attack_code/` | soundness of the conformal-radius program | line-by-line audit; corrupted inputs and injected bugs |
+| `referee/attack_theory/` | the lemmas of the paper | re-derivation and numerical tests of each lemma |
 
 These scripts were written for one-off use and expect to be run from their own folder; some refer to file locations on the machine where they were written.
 

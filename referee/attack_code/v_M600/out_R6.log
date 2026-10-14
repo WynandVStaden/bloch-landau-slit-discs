@@ -1,0 +1,14 @@
+density coefficients read from density_R6_n48.json
+design R6: 6 slits, solver size n = 48; floating-point conformal radius 1.520743036313
+planning (branch-and-bound proofs of the kernel bounds):
+  slit 0 (class 0, a = 1.0986): r = 1.34403, B = 5.1, 600 interpolation nodes, quadrature nodes 77..81, 1.42e+05 kernel evaluations; planned in 0 s
+  slit 3 (class 1, a = 0.4055): r = 1.34403, B = 3.0, 600 interpolation nodes, quadrature nodes 77..80, 1.42e+05 kernel evaluations; planned in 0 s
+  slit 0 (class 0): max |f| at nodes <= 3.975e-13, sum of |coefficients| <= 1.515e-10, interpolation remainder <= 1.4e-75; sup |U| <= 1.515e-10   [2 s]
+  slit 3 (class 1): max |f| at nodes <= 4.195e-13, sum of |coefficients| <= 1.602e-10, interpolation remainder <= 8.6e-76; sup |U| <= 1.602e-10   [0 s]
+Traceback (most recent call last):
+  File "C:\Users\wvs00\claude_chat\bloch_record\referee\attack_code\v_M600\conformal_certificate.py", line 418, in <module>
+    lower = certify(name, n, procs)
+  File "C:\Users\wvs00\claude_chat\bloch_record\referee\attack_code\v_M600\conformal_certificate.py", line 399, in certify
+    assert delta >= 0
+           ^^^^^^^^^^
+AssertionError

@@ -26,12 +26,16 @@
 
 \begin{abstract}
 We exhibit a disc with $24$ slits, $18$ of them curved, and give a computer-assisted proof that its ratio of
-inradius to conformal radius is less than $0.65628589$. This is below the best previously proved upper bound
-$0.6563937$ for the univalent Bloch--Landau constant (Carroll and Ortega-Cerd\`a, 2009) and below the best
-numerical value $0.656319277$ in the literature (Ortega-Cerd\`a and Pridhnani, 2010). In the proof, the inradius is bounded by an exact covering argument, and the conformal radius is
+inradius to conformal radius is less than $0.65628589$. This is below the best upper bound for the univalent
+Bloch--Landau constant previously stated as a theorem, $0.6563937$ (Carroll and Ortega-Cerd\`a, 2009, by numerical
+evaluation of an explicit formula), and below the best numerical value $0.656319277$ in the literature
+(Ortega-Cerd\`a and Pridhnani, 2010). In the proof, the inradius is bounded by an exact covering argument, and the conformal radius is
 bounded below by a comparison function whose boundary values are controlled in ball arithmetic.
 The domain was found by an evolutionary search driven by a spectral integral-equation solver.
 \end{abstract}
+
+\subjclass[2020]{30C25, 30C85, 65G30}
+\keywords{Bloch--Landau constant, univalent functions, conformal radius, computer-assisted proof}
 
 \maketitle
 
@@ -39,7 +43,7 @@ The domain was found by an evolutionary search driven by a spectral integral-equ
 
 Let $\D$ be the unit disc. For a domain $D\subset\C$ write $R(D)$ for its \emph{inradius}, the supremum of the
 radii of the discs contained in $D$. The \emph{univalent Bloch--Landau constant}, also called the univalent or
-schlicht Bloch constant, is
+schlicht Bloch constant and introduced by Landau \cite{Lan}, is
 \[
 \U=\inf\bigl\{R(f(\D)):\ f\text{ univalent in }\D,\ |f'(0)|=1\bigr\};
 \]
@@ -54,6 +58,7 @@ and $\U$ is the infimum of the right-hand side. The bounds in Table~\ref{tab:his
 
 \begin{table}[h]
 \centering\small\setlength{\tabcolsep}{4pt}
+\resizebox{\textwidth}{!}{%
 \begin{tabular}{lll}
 \toprule
  & upper bound & domain: a disc minus\ldots\\
@@ -62,35 +67,43 @@ Robinson \cite{Rob} (1935) & $0.658$ & radial slits\\
 Goodman \cite{Good} (1945) & $0.65647$ & radial slits in bisecting generations\\
 Beller, Hummel \cite{BH} (1985) & $0.6564155$ & radial slits, third generation not bisecting\\
 Carroll, Ortega-Cerd\`a \cite{COC} (2009) & $0.6563937$ & six radial slits, six harmonically symmetric arcs\\
-Ortega-Cerd\`a, Pridhnani \cite{OCP} (2010) & $0.656319277$ & as \cite{COC}, with more such arcs\\
+Ortega-Cerd\`a, Pridhnani \cite{OCP} (2010) & $0.656319277272$ & as \cite{COC}, with more such arcs\\
 \bottomrule
-\end{tabular}
+\end{tabular}}
 \caption{Upper bounds for $\U$. The value of \cite{COC} is the numerical evaluation of an explicit formula. The
 values of \cite{BH} and \cite{OCP} are numerical; the authors of \cite{OCP} state that they have not done a
-rigorous error analysis. The best lower bound known to us is $0.5708858$ \cite{Sk}.}\label{tab:history}
+rigorous error analysis. Lower bounds go back to Landau \cite{Lan} and were improved by several authors (see
+\cite{COC} for references); the best known to us is $0.5708858$ \cite{Sk}.}\label{tab:history}
 \end{table}
 
 \begin{theorem}\label{thm:main}
-$\U<0.65628589$.
+The domain $D$ of Section~\ref{sec:domain} satisfies $R(D)/\rho(D)<0.65628589$. Consequently $\U<0.65628589$.
 \end{theorem}
 
-The domain $D$ that proves Theorem~\ref{thm:main} is described in Section~\ref{sec:domain}. The proof has two
-independent parts:
+The proof has two independent parts:
 \[
 R(D)\le 1+10^{-9}\quad\text{(Proposition \ref{prop:inradius})},\qquad
 \rho(D)\ge 1.523726208329\quad\text{(Proposition \ref{prop:rho})},
 \]
 and $(1+10^{-9})/1.523726208329<0.65628589$.
 Both parts rely on computations, carried out in exact integer arithmetic and in ball arithmetic with the Arb
-library \cite{Arb}; the programs are part of the repository accompanying this paper and run in about one minute.
+library \cite{Arb}; the programs and their data are part of the repository accompanying this paper, and run in
+about one minute on a desktop computer.
 Section~\ref{sec:numerics} describes how the domain was found and the independent numerical checks, none of
 which is used in the proof.
 
-The domains of \cite{COC,OCP} are built from arcs that are harmonically symmetric, a condition which is necessary
-for the boundary arcs of an extremal domain that do not touch an extremal disc \cite{Car} and which makes those
-domains amenable to explicit computation. No such condition is imposed here: the slits are taken from a
-four-parameter family and optimised numerically. The resulting domain nevertheless resembles the domain
-of \cite{OCP} (Figure~\ref{fig:domain}).
+The domains of \cite{COC,OCP} are built from arcs that are harmonically symmetric (each subarc has the same
+harmonic measure at $0$ from its two sides). Carroll \cite{Car}, extending a criterion of Jenkins \cite{Jen},
+showed this to be necessary for every boundary arc of an extremal domain that does not meet the boundary of an
+extremal disc; it also makes those domains amenable to explicit computation. No such condition is imposed here:
+the slits are taken from a four-parameter family and optimised numerically (Figure~\ref{fig:domain}).
+
+The method of proof for the conformal radius, a comparison function built from a computed density and controlled
+by validated numerics, is in the spirit of the rigorous bounds for logarithmic capacity of Ransford and Rostand
+\cite{RR}; computer-assisted proofs with the same library have recently been given for neighbouring constants by
+Wikstr\"om \cite{Wik}. Lemmas \ref{lem:coef}--\ref{lem:interp} below are versions of standard facts about Chebyshev
+expansions of analytic functions \cite[Chapters 4 and 8]{Tref}; we include proofs because we need them with
+a bound on the real part only and with explicit constants.
 
 \section{The domain}\label{sec:domain}
 
@@ -147,7 +160,7 @@ that $D=\{|z|<R\}\setminus K$; this is not needed for the proof.
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.62\textwidth]{../domain_G.png}
+\includegraphics[width=0.62\textwidth]{domain_G.png}
 \caption{The domain $D$. The disc $|z|<1$ is one of $22$ discs of radius between $1-4\times10^{-6}$ and $1$
 that are locally largest.}\label{fig:domain}
 \end{figure}
@@ -245,8 +258,10 @@ because the imaginary part of $w_j$ is even in $x$. Put
 \]
 $\Phi$ is harmonic in $\C\setminus2\pi i\Z$, it is $2\pi i$-periodic, $\Phi(-w)=\Phi(\bar w)=\Phi(w)$, and
 \begin{equation}\label{eq:phi-asym}
-\Phi(w)=-\tfrac12|\re w|-\log\bigl|1-e^{-|\re w|-i\,\im w\,\mathrm{sgn}(\re w)}\bigr|=-\tfrac12|\re w|+O(e^{-|\re w|})
-\quad(|\re w|\to\infty),
+\begin{aligned}
+\Phi(w)&=-\tfrac12|\re w|-\log\bigl|1-e^{-|\re w|-i\,\im w\,\mathrm{sgn}(\re w)}\bigr|\\
+&=-\tfrac12|\re w|+O(e^{-|\re w|})\qquad(|\re w|\to\infty),
+\end{aligned}
 \end{equation}
 where $\mathrm{sgn}(0)=1$.
 
@@ -276,12 +291,13 @@ $u(z)=-\log|z|+c+o(1)$ as $z\to0$.
 (a) Periodicity and harmonicity follow from the properties of $\Phi$. For continuity, substitute
 $y=\cos\vartheta$: each term of \eqref{eq:U} is $\int_0^\pi\Phi(w-w_j(\cos\vartheta))\psi_j(\cos\vartheta)\,d\vartheta$,
 the potential, with kernel $\Phi$, of a measure $\nu$ with bounded density with respect to $d\vartheta$. Since
-$\re w_j(\cos\vartheta)=L+a_j\cos\vartheta$ and the set $\{\vartheta\in[0,\pi]:|\cos\vartheta-\xi|<\eta\}$ has
-length at most $C\sqrt\eta$ for all $\xi$, every disc of radius $\eta$ has $|\nu|$-measure at most $C'\sqrt\eta$.
+$\re w_j(\cos\vartheta)=L+a_j\cos\vartheta$ and the set $\{\vartheta\in[0,\pi]:|\cos\vartheta-\xi|<\eta/a_j\}$ has
+length at most $C\sqrt{\eta/a_j}$ for all $\xi$, every disc of radius $\eta$ has $|\nu|$-measure at most
+$C'\sqrt\eta$.
 Splitting the integral over $\{|w-\zeta|<\eta\}$ into the annuli $2^{-k-1}\eta\le|w-\zeta|<2^{-k}\eta$ gives
 $\sup_w\int_{|w-\zeta|<\eta}\bigl|\log|w-\zeta|\bigr|\,d|\nu|(\zeta)\to0$ as $\eta\to0$. As $\Phi(w)+\log|w|$ is
-continuous near $0$, the potential is therefore the uniform limit, as $\eta\to0$, of the potentials with the
-continuous kernels $\min(\Phi,\log(1/\eta))$, and so it is continuous. (For background on logarithmic potentials
+continuous near $0$ and $\Phi$ is $2\pi i$-periodic, the potential is therefore the uniform limit, as $\eta\to0$,
+of the potentials with the continuous kernels $\min(\Phi,\log(1/\eta))$, and so it is continuous. (For background on logarithmic potentials
 see \cite{Rans}.)
 
 (b) $L-\re w$ changes sign under $\sigma$. Since $\sigma(w)-\sigma(w')=-\overline{(w-w')}$ and
@@ -322,7 +338,8 @@ By Lemma \ref{lem:U}(d) it is enough to consider one slit $i$ in each class. Let
 \[
 f_i(x)=U(w_i(x)),\qquad-1\le x\le1 .
 \]
-By Lemma \ref{lem:U}(b) and \eqref{eq:sigma}, $f_i$ is odd, so $\sup_K u\le\max_i\sup_{[-1,1]}|f_i|$.
+Then $\sup_Ku\le\max_i\sup_{[-1,1]}|f_i|$. By Lemma \ref{lem:U}(b) and \eqref{eq:sigma}, $f_i$ is odd, which
+will halve the work below.
 We write $\|\cdot\|$ for the supremum norm on $[-1,1]$, $d\mu=dy/\sqrt{1-y^2}$, and use two kernels:
 \[
 G_{ij}(x,y)=2\sinh\frac{w_i(x)-w_j(y)}2\quad(j\ne i),\qquad
@@ -341,8 +358,9 @@ For $n\ge1$ and $-1\le x\le1$, $\displaystyle\int_{-1}^{1}-\log|x-y|\,T_n(y)\,d\
 \end{lemma}
 
 \begin{proof}
-With $x=\cos\phi$, $y=\cos\vartheta$ one has
-$-\log|\cos\phi-\cos\vartheta|=\log2+\sum_{m\ge1}\frac2m\cos m\phi\cos m\vartheta$ in $L^2$, and
+With $x=\cos\phi$, $y=\cos\vartheta$ one has, for each fixed $\phi\in[0,\pi]$,
+$-\log|\cos\phi-\cos\vartheta|=\log2+\sum_{m\ge1}\frac2m\cos m\phi\cos m\vartheta$ in $L^2(0,\pi)$ (this is the
+classical expansion of the logarithmic kernel; see e.g.\ \cite[Chapter~9]{MH}), and
 $\int_0^\pi\cos m\vartheta\cos n\vartheta\,d\vartheta=\frac\pi2\delta_{mn}$.
 \end{proof}
 
@@ -391,7 +409,9 @@ $l=1,\dots,N$, and $\kappa=2N-1-d\ge0$. Then
 \end{lemma}
 
 \begin{proof}
-Write $F=P+\varrho$ with $P$ the Chebyshev series of $F$ truncated at degree $\kappa$; then
+The Chebyshev series of $F$ converges absolutely and uniformly, and its sum is $F$, because a continuous
+function is determined by its Chebyshev coefficients. Write $F=P+\varrho$ with $P$ the series truncated at
+degree $\kappa$; then
 $\|\varrho\|\le\sum_{k>\kappa}Cr^{-k}=Cr^{-\kappa}/(r-1)$. The rule is exact for polynomials of degree at most
 $2N-1$, hence for $P\psi$, and both the integral and the rule applied to $\varrho\psi$ are bounded by
 $\pi\|\varrho\|\|\psi\|$.
@@ -407,6 +427,8 @@ $T_M$. Then
 \end{lemma}
 
 \begin{proof}
+As in the previous proof, $f$ is the uniform sum of its Chebyshev series, and the interpolation operator, being
+linear and bounded on $C[-1,1]$, may be applied term by term.
 At the zeros $x_l=\cos\frac{(2l+1)\pi}{2M}$ of $T_M$ and for $k=2Mm\pm k'$ with $0\le k'\le M$ one has
 $T_k(x_l)=(-1)^mT_{k'}(x_l)$, and $T_M(x_l)=0$. So the interpolant of $T_k$, $k\ge M$, is $\pm T_{k'}$ with
 $k'<M$, or $0$, and $\|T_k-\text{interpolant}\|\le2$. Since interpolation is linear and reproduces polynomials
@@ -433,8 +455,11 @@ This is done by branch and bound: the set $Q_b\times[-1,1]$, of real dimension t
 on each box the ball-arithmetic evaluation of the kernel gives an enclosure excluding $0$, with upper bound less
 than four times the lower bound. Put $A_{ij}=\max(|\log\lambda_{ij}|,|\log\Lambda_{ij}|)$.
 
-Since the kernels are continuous and do not vanish on the simply connected set $Q_b\times[-1,1]$ (nor on a
-neighbourhood of it), they have continuous logarithms there, analytic in $x$. Thus
+(In the program the rectangle is in fact slightly larger than $Q_b$, by a relative amount $10^{-12}$, and the
+ellipse parameter slightly smaller; the inclusion of the ellipse in the rectangle is verified.)
+Since the kernels are continuous and do not vanish on the compact, simply connected set $Q_b\times[-1,1]$, they do
+not vanish on $Q\times[-1,1]$ for some open rectangle $Q\supset Q_b$, and have continuous logarithms there,
+analytic in $x$. Thus
 \begin{align*}
 h_i(x)={}&-a_ix+\sum_nc_{i,n}\frac\pi nT_n(x)-\int_{-1}^1\log K_i(x,y)\,\psi_i(y)\,d\mu(y)\\
 &-\sum_{j\ne i}\int_{-1}^1\log G_{ij}(x,y)\,\psi_j(y)\,d\mu(y)
@@ -453,7 +478,8 @@ satisfy $|\phi_k|\le4B_ir_i^{-k}$.
 \smallskip\noindent\textbf{Step 2: kernel bounds in the variable $y$.}
 For every $j$ a number $b'_{ij}>0$ is chosen and bounds of the form \eqref{eq:kb} are computed in the same way for
 $x\in[-1,0]$ (real) and $y\in Q_{b'_{ij}}$, giving $A'_{ij}$. For each fixed $x\in[-1,0]$,
-$y\mapsto\log G_{ij}(x,y)$ (respectively $\log K_i(x,y)$) is then analytic near $E_{r}$, $r=b'_{ij}+\sqrt{1+b'^2_{ij}}$,
+$y\mapsto\log G_{ij}(x,y)$ (respectively $\log K_i(x,y)$) is then analytic near $E_{r}$, with $r$ slightly less
+than $b'_{ij}+\sqrt{1+b'^2_{ij}}$,
 with real part bounded by $A'_{ij}$, and Lemmas \ref{lem:coef} and \ref{lem:quad} show that the $N$-point
 Gauss--Chebyshev rule computes the corresponding integral in \eqref{eq:f} with an error of at most
 \begin{equation}\label{eq:qerr}
@@ -474,15 +500,17 @@ cosine transform, in ball arithmetic. By Lemma \ref{lem:interp},
 \sup_{[-1,1]}|f_i|\le\delta_i:=\sum_{q<M}|\gamma_q|+\frac{8B_i}{r_i-1}r_i^{1-M}.
 \]
 Then $\delta=\max_i\delta_i$ satisfies the hypothesis of Proposition \ref{prop:criterion}, and the program
-evaluates $\exp(c-\delta)$ in ball arithmetic, with $c$ from \eqref{eq:c}, and rounds it down.
+evaluates $\exp(c-\delta)$ in ball arithmetic, with $c$ from \eqref{eq:c}, and rounds it down. The computation
+uses a precision of $100$ bits.
 
 \subsection{Result}
 
 \begin{proof}[Proof of Proposition \ref{prop:rho}]
 \sloppy
 The coefficients $c_{j,n}$, $n\le63$, are stored in the repository, in the data file \texttt{density\_G\_n64.json}.
-With them, the program gives the values in Table~\ref{tab:cert}, hence $\delta=2.656\times10^{-8}$, $c=0.42115881436\ldots$ and
-$\rho(D)\ge\exp(c-\delta)\ge1.523726208329$.
+They are listed in the Appendix. With them, the program gives the values in Table~\ref{tab:cert}, hence
+$\delta\le2.6563\times10^{-8}$ and $c\ge0.4211588143613$, so that
+$\rho(D)\ge\exp(c-\delta)\ge\exp(0.4211587877983)>1.523726208329$.
 \end{proof}
 
 \begin{table}[h]
@@ -491,14 +519,15 @@ $\rho(D)\ge\exp(c-\delta)\ge1.523726208329$.
 \toprule
 class & $a_i$ & $r_i$ & $B_i$ & $M$ & $N_{ij}$ & $\delta_i$\\
 \midrule
-0 & $1.6097$ & $1.00934$ & $9.4$ & $3196$ & $79$--$2225$ & $2.66\times10^{-8}$\\
+0 & $1.6097$ & $1.00934$ & $9.4$ & $3196$ & $79$--$2225$ & $2.6563\times10^{-8}$\\
 1 & $0.9165$ & $1.01733$ & $6.6$ & $1676$ & $78$--$1118$ & $3.55\times10^{-9}$\\
 2 & $0.5839$ & $1.00805$ & $8.7$ & $3716$ & $78$--$2088$ & $1.76\times10^{-8}$\\
 3 & $0.3645$ & $1.01548$ & $5.7$ & $1872$ & $78$--$1087$ & $3.76\times10^{-9}$\\
 4 & $0.1411$ & $1.34403$ & $4.1$ & $88$ & $76$--$153$ & $7.48\times10^{-10}$\\
 \bottomrule
 \end{tabular}
-\caption{Data of the certificate for the five classes. The small values of $r_i-1$ for classes $0$ and $2$,
+\caption{Data of the certificate for the five classes; the values of $\delta_i$ are rounded up. The small values
+of $r_i-1$ for classes $0$ and $2$,
 and $1$ and $3$, reflect the proximity of the slits of these classes: about $0.03$ in the $w$-plane.}\label{tab:cert}
 \end{table}
 
@@ -541,21 +570,37 @@ integrated exactly (Lemma \ref{lem:logkernel}) and all other integrals computed 
 rule, gives a linear system of size $24n$ with condition number of order $10^3$. Then
 $\rho\approx\exp(c)$ with $c$ from \eqref{eq:c}. In practice the method converges very fast: for $D$ the value
 $\rho=1.523726248805$ is the same for $n=64$, $96$ and $128$. For slit discs of the two types of the Remark
-above it agrees with the closed-form values to rounding error (at most $3\times10^{-16}$).
+at the end of Section~\ref{sec:rho} it agrees with the closed-form values to rounding error (at most
+$3\times10^{-16}$).
 
 \subsection*{The search}
 The parameters $R$, the tip modulus of class $1$ and $(\theta,t,b_1,b_2)$ for classes $2$ to $4$ were optimised
 by differential evolution \cite{SP}, followed by a simplex search, the objective being the ratio of a
 floating-point inradius (local maxima of the distance to the boundary, located on a grid and refined by Newton's
 method) to the computed conformal radius. As a check, the best disc with six radial slits gives $0.657793$, in
-agreement with \cite{Rob}; the best disc with twelve radial slits that we found gives $0.6564163$, slightly above
-the value $0.6564155$ of \cite{BH}.
+agreement with \cite{Rob}. The best disc with twelve radial slits that we found gives $0.6564163$; this is
+slightly above the value $0.6564155$ of \cite{BH}, whose configuration we have not been able to compare with ours.
+
+The slits of classes $2$ and $3$ leave the circle within $0.032$ radians of the radial slits of classes $0$ and
+$1$ and run beside them before bending away. This suggests that the search is approximating arcs that branch off
+the radial slits, as in \cite{OCP}, which the family \eqref{eq:slit} cannot represent exactly; it is also the
+reason for the small values of $r_i-1$ in Table~\ref{tab:cert}.
 
 \subsection*{Independent recomputation}
-Separately written floating-point programs, using different methods, reproduced the values for $D$: a
-branch and bound over the whole disc found no disc of radius greater than $1+2\times10^{-8}$, and a boundary
-integral equation in the $z$-plane, with a parametrisation adapted to the tips and no use of symmetry, gave
-$\rho(D)=1.5237262488052$, stable under changes of the discretisation and under the substitution $\zeta=z^3$.
+Separately written programs, using different methods and sharing no code with ours, reproduced the values for
+$D$. For the inradius, a search in $50$-digit arithmetic over the whole disc found exactly $22$ locally maximal
+discs of radius greater than $0.99$, the largest being the unit disc and the next of radius
+$1-1.24\times10^{-10}$, and the covering used in the proof of Proposition~\ref{prop:inradius} was re-verified by an
+independently written checker based on rational arithmetic and a different interval library. For the conformal
+radius, three boundary-integral solvers (in the $z$-plane with the Green function of the disc, after the
+substitution $\zeta=z^3$ and an explicit map removing the radial slits, and on the reflected arcs in
+$34$-digit arithmetic) agree on
+\[
+\rho(D)=1.523726248805208911047994\ldots,
+\]
+which exceeds the bound of Proposition~\ref{prop:rho} by $4.05\times10^{-8}$. From the same computation, the
+harmonic measure at $0$ of the six radial slits is $0.909$, of the eighteen curved slits $0.083$, and of the
+circle $0.008$.
 
 \subsection*{The numerical value}
 The floating-point value of the ratio is $0.656285866$; the proved bound is weaker by $1.8\times10^{-8}$.
@@ -563,15 +608,69 @@ The floating-point value of the ratio is $0.656285866$; the proved bound is weak
 \section{Remarks}
 
 \begin{enumerate}[leftmargin=2em]
-\item \emph{What is trusted.} The proof relies on the correctness of the Arb library \cite{Arb} and its Python
-interface, of integer arithmetic in Python, and of the two certificate programs, which together comprise about
-$650$ lines.
+\item \emph{What is trusted.} The proof relies on the correctness of the Arb library \cite{Arb} (as contained in
+FLINT~3.6.0) and its Python interface python-flint~0.9.0, of Python~3.14 (integer and rational arithmetic, the
+conversion of decimal strings to rationals and of double-precision numbers to and from text), and of the two
+certificate programs, which together comprise about $650$ lines.
 \item \emph{Optimality.} The domain is the output of a numerical search in a small family. We have not examined
-whether its arcs are harmonically symmetric, and there is no reason to expect the bound of
+how far its arcs are from being harmonically symmetric, and there is no reason to expect the bound of
 Theorem~\ref{thm:main} to be sharp.
 \item \emph{Other domains.} A simpler domain with $18$ slits, six radial and twelve curved with $b_2=0$, gives
 $\U<0.65630853$ by the same programs.
 \end{enumerate}
+
+\appendix
+\section*{Appendix: the coefficients}
+
+Table~\ref{tab:coef} lists the coefficients $c_{j,n}$ of the odd polynomials $\psi_j=\sum_nc_{j,n}T_n$ used in the
+proof of Proposition~\ref{prop:rho}, one column for each class of slits; coefficients with even $n$ are zero.
+They are double-precision numbers, printed here to full precision, and are to be read as exact rational numbers.
+The data file \texttt{density\_G\_n64.json} from which the table was generated has SHA-256 checksum
+\begin{center}\footnotesize\texttt{f2d1d4e6ea71610e2cd60075e961e5ec\\956c063b90b46425453bb213f0f8843b}\end{center}
+
+\begin{table}[h]
+\centering\tiny\setlength{\tabcolsep}{3pt}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{rlllll}
+\toprule
+$n$ & class 0 & class 1 & class 2 & class 3 & class 4\\
+\midrule
+1 & $0.2658439564499184$ & $0.0664626186297778$ & $0.01084272887553566$ & $0.0035303276966297255$ & $0.0012345755400823694$\\
+3 & $0.05637659874884197$ & $0.016836854369668235$ & $0.004424927602509483$ & $0.0012998494197755909$ & $4.8849044221446233\mathrm{e}{-}5$\\
+5 & $-0.01703746526980002$ & $-0.0031345411931305496$ & $0.000755213124641526$ & $0.00021477646325562263$ & $6.008450880180297\mathrm{e}{-}7$\\
+7 & $0.006462107717257505$ & $0.0014918027277246925$ & $-9.168106447075761\mathrm{e}{-}5$ & $-2.2135629810589796\mathrm{e}{-}5$ & $4.8370282093146894\mathrm{e}{-}9$\\
+9 & $-0.001626094984808196$ & $-0.00019569699849765967$ & $-3.021891922103628\mathrm{e}{-}5$ & $-8.684097869834302\mathrm{e}{-}6$ & $-3.1921836073368237\mathrm{e}{-}10$\\
+11 & $-0.0007743669766230409$ & $-0.0003913884360384366$ & $1.2823337718106776\mathrm{e}{-}5$ & $2.7924544750012304\mathrm{e}{-}6$ & $-1.4002436519034833\mathrm{e}{-}11$\\
+13 & $0.001495017176779129$ & $0.0004387184769304271$ & $-1.0666270094776293\mathrm{e}{-}6$ & $-1.2141444936006115\mathrm{e}{-}7$ & $-1.0570967341850974\mathrm{e}{-}13$\\
+15 & $-0.001227170675017578$ & $-0.00025337767528805073$ & $-8.330628639266173\mathrm{e}{-}7$ & $-1.7940820871450863\mathrm{e}{-}7$ & $2.538328479336748\mathrm{e}{-}15$\\
+17 & $0.0006306306654494607$ & $6.2505157954792\mathrm{e}{-}5$ & $4.5541649326072783\mathrm{e}{-}7$ & $7.505967994221237\mathrm{e}{-}8$ & $5.501196648100929\mathrm{e}{-}17$\\
+19 & $-0.00012693100787896454$ & $4.1374234928953875\mathrm{e}{-}5$ & $-1.2732740341025789\mathrm{e}{-}7$ & $-1.5058787584978782\mathrm{e}{-}8$ & $1.152659375282597\mathrm{e}{-}16$\\
+21 & $-0.00013630152161504065$ & $-6.238789037395611\mathrm{e}{-}5$ & $1.979012841498994\mathrm{e}{-}8$ & $5.357487687263508\mathrm{e}{-}10$ & $-1.916711328137551\mathrm{e}{-}16$\\
+23 & $0.00019196325480885212$ & $4.1196831308406224\mathrm{e}{-}5$ & $-4.670667681013364\mathrm{e}{-}10$ & $8.869220416689999\mathrm{e}{-}10$ & $4.2589720089756627\mathrm{e}{-}16$\\
+25 & $-0.0001380677473619505$ & $-1.375132845746876\mathrm{e}{-}5$ & $2.520264393835525\mathrm{e}{-}9$ & $-5.092364362809905\mathrm{e}{-}10$ & $-2.454972531686084\mathrm{e}{-}16$\\
+27 & $6.067974008676051\mathrm{e}{-}5$ & $-2.9527744538195098\mathrm{e}{-}6$ & $-7.57137963161685\mathrm{e}{-}9$ & $2.1511648262617658\mathrm{e}{-}10$ & $-2.6875508383431695\mathrm{e}{-}16$\\
+29 & $-5.493111573319383\mathrm{e}{-}6$ & $7.508821960107003\mathrm{e}{-}6$ & $9.486999511574193\mathrm{e}{-}9$ & $-1.1492278279728353\mathrm{e}{-}12$ & $-2.388435270236101\mathrm{e}{-}16$\\
+31 & $-1.773974192585009\mathrm{e}{-}5$ & $-5.284294491640098\mathrm{e}{-}6$ & $-4.366064332322695\mathrm{e}{-}9$ & $-1.9397909222115592\mathrm{e}{-}10$ & $-1.2596255193050276\mathrm{e}{-}16$\\
+33 & $1.8419947085234444\mathrm{e}{-}5$ & $1.6674415777304093\mathrm{e}{-}6$ & $-5.667277195203394\mathrm{e}{-}9$ & $2.409751920723061\mathrm{e}{-}10$ & $2.1578489027266416\mathrm{e}{-}16$\\
+35 & $-9.981514261802465\mathrm{e}{-}6$ & $5.970658768846077\mathrm{e}{-}7$ & $1.114461430380083\mathrm{e}{-}8$ & $4.34162562886784\mathrm{e}{-}11$ & $-2.3718334244699168\mathrm{e}{-}17$\\
+37 & $1.8117614956113595\mathrm{e}{-}6$ & $-1.1524377575923242\mathrm{e}{-}6$ & $-4.496796850772678\mathrm{e}{-}9$ & $-5.557926980564214\mathrm{e}{-}10$ & $7.211638512923113\mathrm{e}{-}18$\\
+39 & $2.4222634067861543\mathrm{e}{-}6$ & $7.450180018308411\mathrm{e}{-}7$ & $-9.709343875012773\mathrm{e}{-}9$ & $8.02777769629387\mathrm{e}{-}10$ & $-2.9264480107867724\mathrm{e}{-}16$\\
+41 & $-3.016611209080237\mathrm{e}{-}6$ & $-1.6920156817941574\mathrm{e}{-}7$ & $1.8030666135740144\mathrm{e}{-}8$ & $-3.657497657738812\mathrm{e}{-}10$ & $3.0937144303242365\mathrm{e}{-}16$\\
+43 & $1.773617656587965\mathrm{e}{-}6$ & $-1.706694232100093\mathrm{e}{-}7$ & $-1.2366275438838279\mathrm{e}{-}8$ & $-5.362842022583533\mathrm{e}{-}10$ & $3.5756648835393035\mathrm{e}{-}17$\\
+45 & $-3.1130735013198035\mathrm{e}{-}7$ & $2.3432728205388664\mathrm{e}{-}7$ & $-1.9004669696994097\mathrm{e}{-}9$ & $1.1545603666019348\mathrm{e}{-}9$ & $2.8238327926700713\mathrm{e}{-}16$\\
+47 & $-5.658860465299528\mathrm{e}{-}7$ & $-1.4869461170262822\mathrm{e}{-}7$ & $1.2504218296561064\mathrm{e}{-}8$ & $-9.494194414115378\mathrm{e}{-}10$ & $-1.4371297437316388\mathrm{e}{-}16$\\
+49 & $7.698260963827074\mathrm{e}{-}7$ & $4.3044298362097076\mathrm{e}{-}8$ & $-1.2471298378078963\mathrm{e}{-}8$ & $1.131013604248632\mathrm{e}{-}10$ & $5.945606601093685\mathrm{e}{-}18$\\
+51 & $-5.651644068843433\mathrm{e}{-}7$ & $1.884459464421689\mathrm{e}{-}8$ & $4.705162206296023\mathrm{e}{-}9$ & $6.742760606180372\mathrm{e}{-}10$ & $-4.7994580857323166\mathrm{e}{-}17$\\
+53 & $2.5360240160267566\mathrm{e}{-}7$ & $-3.271772000003857\mathrm{e}{-}8$ & $3.177842240339506\mathrm{e}{-}9$ & $-8.990327395121527\mathrm{e}{-}10$ & $4.0233952056852967\mathrm{e}{-}16$\\
+55 & $-1.9530457328933066\mathrm{e}{-}8$ & $2.0973581121274305\mathrm{e}{-}8$ & $-6.11719660977501\mathrm{e}{-}9$ & $5.775386285273372\mathrm{e}{-}10$ & $4.05949010301096\mathrm{e}{-}17$\\
+57 & $-8.576777561052305\mathrm{e}{-}8$ & $-5.562373338622792\mathrm{e}{-}9$ & $4.188965768348236\mathrm{e}{-}9$ & $-8.61223876818202\mathrm{e}{-}11$ & $4.122774757943486\mathrm{e}{-}16$\\
+59 & $9.310135236622469\mathrm{e}{-}8$ & $-3.0267879840960993\mathrm{e}{-}9$ & $-3.4369554231357516\mathrm{e}{-}10$ & $-2.340909860228048\mathrm{e}{-}10$ & $-2.8535580022323825\mathrm{e}{-}16$\\
+61 & $-5.8478696704355786\mathrm{e}{-}8$ & $4.6144884100884215\mathrm{e}{-}9$ & $-2.844454399107138\mathrm{e}{-}9$ & $3.0670010214819515\mathrm{e}{-}10$ & $7.933790569320554\mathrm{e}{-}16$\\
+63 & $2.8685799270171976\mathrm{e}{-}8$ & $-3.591728887380989\mathrm{e}{-}9$ & $4.482548513846673\mathrm{e}{-}9$ & $-2.6982485315209275\mathrm{e}{-}10$ & $-7.205433996584475\mathrm{e}{-}16$\\
+\bottomrule
+\end{tabular}}
+\caption{The coefficients $c_{j,n}$, $n$ odd. The notation $x\mathrm{e}{-}k$ means $x\times10^{-k}$.}\label{tab:coef}
+\end{table}
 
 \section*{Declaration on the use of AI}
 
@@ -581,25 +680,36 @@ AI system (Claude, Anthropic), under my direction throughout.
 \begin{thebibliography}{10}
 \bibitem{BH} E.~Beller and J.~A.~Hummel, \emph{On the univalent Bloch constant}, Complex Variables Theory Appl.
 \textbf{4} (1985), 243--252.
-\bibitem{Car} T.~Carroll, \emph{An extension of Jenkins' condition for extremal domains associated with the
-univalent Bloch--Landau constant}, Comput. Methods Funct. Theory \textbf{8} (2008), 159--165.
+\bibitem{Car} T.~Carroll, \emph{An extension of Jenkin's condition for extremal domains associated with the
+univalent Bloch--Landau constant}, Comput. Methods Funct. Theory \textbf{8} (2008), no.~1, 159--165.
 \bibitem{COC} T.~Carroll and J.~Ortega-Cerd\`a, \emph{The univalent Bloch--Landau constant, harmonic symmetry and
 conformal glueing}, J. Math. Pures Appl. (9) \textbf{92} (2009), 396--406; arXiv:0806.2282.
 \bibitem{Good} R.~E.~Goodman, \emph{On the Bloch--Landau constant for schlicht functions}, Bull. Amer. Math. Soc.
 \textbf{51} (1945), 234--239.
+\bibitem{Jen} J.~A.~Jenkins, \emph{A criterion associated with the schlicht Bloch constant}, Kodai Math. J.
+\textbf{15} (1992), no.~1, 79--81.
 \bibitem{Arb} F.~Johansson, \emph{Arb: efficient arbitrary-precision midpoint-radius interval arithmetic}, IEEE
 Trans. Comput. \textbf{66} (2017), 1281--1292.
+\bibitem{Lan} E.~Landau, \emph{\"Uber die Blochsche Konstante und zwei verwandte Weltkonstanten}, Math. Z.
+\textbf{30} (1929), 608--634.
+\bibitem{MH} J.~C.~Mason and D.~C.~Handscomb, \emph{Chebyshev polynomials}, Chapman \& Hall/CRC, Boca Raton, FL,
+2003.
 \bibitem{OCP} J.~Ortega-Cerd\`a and B.~Pridhnani, \emph{The P\'olya--Tchebotar\"ov problem}, in: Harmonic analysis
 and partial differential equations, Contemp. Math. \textbf{505}, Amer. Math. Soc., Providence, RI, 2010,
 pp.~153--170; arXiv:0809.2483.
 \bibitem{Rans} T.~Ransford, \emph{Potential theory in the complex plane}, London Math. Soc. Student Texts
 \textbf{28}, Cambridge University Press, Cambridge, 1995.
+\bibitem{RR} T.~Ransford and J.~Rostand, \emph{Computation of capacity}, Math. Comp. \textbf{76} (2007),
+1499--1520.
 \bibitem{Rob} R.~M.~Robinson, \emph{The Bloch constant $\mathfrak A$ for a schlicht function}, Bull. Amer. Math.
 Soc. \textbf{41} (1935), 535--540.
 \bibitem{Sk} B.~Skinner, \emph{The univalent Bloch constant problem}, Complex Var. Elliptic Equ. \textbf{54}
 (2009), 951--955.
 \bibitem{SP} R.~Storn and K.~Price, \emph{Differential evolution -- a simple and efficient heuristic for global
 optimization over continuous spaces}, J. Global Optim. \textbf{11} (1997), 341--359.
+\bibitem{Tref} L.~N.~Trefethen, \emph{Approximation theory and approximation practice}, SIAM, Philadelphia, PA,
+2013.
+\bibitem{Wik} F.~Wikstr\"om, preprints arXiv:2608.17660 and arXiv:2609.23236, 2026.
 \end{thebibliography}
 
 \end{document}

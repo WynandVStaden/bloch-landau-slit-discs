@@ -38,7 +38,7 @@ the kernel in the integration variable on a rectangle, verified by branch-and-bo
 All trusted computations use Arb (python-flint). Floating point is used only to
 choose parameters (ellipse sizes, numbers of nodes), to guide the branch and bound, and to
 produce the c_{j,n}. Enclosures are passed between processes as a double-precision midpoint
-and an upward-rounded radius, which is exact.
+and an upward-rounded radius, so the ball passed on contains the original one.
 
 Usage: python conformal_certificate.py [design, default G] [n, default 64] [processes, default 8]
 """
@@ -364,7 +364,8 @@ def certify(name, n, processes, log=print):
         coef, rho_float = make_density(geo, n)
         with open(density_file, "w") as fh:
             json.dump({"design": name, "n": n, "coefficients": coef, "floating_point_conformal_radius": rho_float}, fh, indent=1)
-        log(f"density coefficients computed by the floating-point solver and written to {density_file}")
+        log(f"NOTE: {density_file} was not found. Density coefficients computed by the floating-point solver and written to it.")
+        log("      The result is still a valid bound, but it need not coincide with the one quoted in the paper.")
     log(f"design {name}: {geo.n_slits} slits, solver size n = {n}; floating-point conformal radius {rho_float:.12f}")
     log("planning (branch-and-bound proofs of the kernel bounds):")
     pl = plan(geo, coef, log)
@@ -397,17 +398,29 @@ def certify(name, n, processes, log=print):
     c1 = arb(0)
     for j in range(geo.n_slits):
         c1 += geo.a[j] * arb(coef[geo.cls[j]][1])
-    assert delta >= 0
-    log_rho_lower = geo.big_l - arb.pi() / 4 * c1 - delta
+    delta_up = up(delta)  # a double that is certainly >= delta (and >= 0)
+    assert delta_up >= 0
+    c_ball = geo.big_l - arb.pi() / 4 * c1
+    log_rho_lower = c_ball - arb(delta_up)
     rho_lower = log_rho_lower.exp()
+    assert rho_lower.lower() > 0
     lower = math.floor(float(rho_lower.lower()) * (1 - 2.0**-40) * 1e12) / 1e12  # rounded down to 12 decimals
     assert arb(lower) < rho_lower
-    log(f"delta = {up(delta):.3e}")
-    log(f"c = L - (pi/4) sum a_j c_j1 = {float((geo.big_l - arb.pi() / 4 * c1).mid()):.13f}")
+    c_low = math.floor(float(c_ball.lower()) * 1e13) / 1e13 - 1e-13  # a 13-decimal number certainly below c
+    assert arb(c_low) < c_ball
+    delta_print = math.ceil(delta_up * 1e12) / 1e12  # rounded up to 12 decimals
+    log(f"delta <= {delta_print:.4e}   (sup of U over the slits)")
+    log(f"c = L - (pi/4) sum a_j c_j1 >= {c_low:.13f}")
     log(f"CERTIFIED: conformal radius of design {name} >= {lower:.12f}   (floating-point value {rho_float:.12f}); "
         f"total time {time.time() - t_start:.0f} s")
     with open(f"conformal_certificate_{name}.json", "w") as fh:
-        json.dump({"design": name, "n": n, "coefficients": coef, "delta_upper": up(delta), "conformal_radius_lower": lower}, fh, indent=1)
+        import flint
+        import platform
+        json.dump({"design": name, "n": n, "coefficients": coef, "delta_upper": delta_up, "c_lower": c_low,
+                   "conformal_radius_lower": lower, "precision_bits": PREC, "python_flint": flint.__version__,
+                   "python": platform.python_version(), "processes": processes,
+                   "plan": {str(i): {k: v for k, v in pl[i].items() if k != "quad"} | {"N": {str(j): q[0] for j, q in pl[i]["quad"].items()}}
+                            for i in pl}}, fh, indent=1)
     return lower
 
 

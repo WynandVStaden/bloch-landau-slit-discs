@@ -1,0 +1,10 @@
+density coefficients read from density_ONE_n32.json
+design ONE: 1 slits, solver size n = 32; floating-point conformal radius 0.888888888889
+planning (branch-and-bound proofs of the kernel bounds):
+  slit 0 (class 0, a = 0.6931): r = 1.34403, B = 2.2, 20 interpolation nodes, quadrature nodes 72..72, 7.20e+02 kernel evaluations; planned in 0 s
+  slit 0 (class 0): max |f| at nodes <= 7.558e-14, sum of |coefficients| <= 9.656e-13, interpolation remainder <= 1.9e-01; sup |U| <= 1.870e-01   [1 s]
+RHO_LOWER_BALL [0.7372687523726953696524784 +/- 9.29e-27] DELTA [0.187019760386 +/- 4.08e-13]
+delta = 1.870e-01
+c = L - (pi/4) sum a_j c_j1 = -0.1177830356564
+CERTIFIED: conformal radius of design ONE >= 0.737268752372   (floating-point value 0.888888888889); total time 1 s
+exact value 4s/(1+s)^2 = 0.888888888889; certified lower bound is below it by 1.52e-01

@@ -59,9 +59,12 @@ ETA_BITS = 69
 
 def slit_table(classes):
     """All slits as (angle numerator data, tip, b1, b2) with exact entries: angle = 2 pi r / 3 + sgn * alpha."""
+    tips = [Fraction(c[1]) for c in classes]
+    assert len(set(tips)) == len(tips), "the classes must have distinct tip radii (classes are identified by their tip)"
     out = []
     for alpha, tip, b1, b2 in classes:
         axial = alpha in ("0", PI3)
+        assert not axial or (Fraction(b1) == 0 and Fraction(b2) == 0), "a class on a symmetry axis must be a radial slit"
         for r in range(3):
             for sgn in ((1,) if axial else (1, -1)):
                 out.append((r, sgn, alpha, Fraction(tip), sgn * Fraction(b1), sgn * Fraction(b2)))
@@ -163,6 +166,7 @@ def verify(big_r, slits, eps, cells, pars):
     ctx.prec = 160
     one = 1 << SCALE_BITS
     limit = one + math.floor(eps * one) - (1 << (SCALE_BITS - ETA_BITS))  # (1 + eps - 2^-69), scaled, rounded down
+    assert eps > 0 and limit > 0
     limit2 = limit * limit
     r2_num, r2_den = (big_r * big_r).numerator, (big_r * big_r).denominator
     cache, counts = {}, [0, 0, 0]
@@ -172,6 +176,7 @@ def verify(big_r, slits, eps, cells, pars):
     assert area == 1, f"leaves do not have the area of the root square (got {area})"
     for (lv, ix, iy, code, kind, j), par in zip(cells.tolist(), pars.tolist()):
         shift = SCALE_BITS + 3 - lv  # cell size = 8 / 2^lv = 2^(3 - lv)
+        assert code in (0, 1, 2) and kind in (0, 1, 2) and 0 <= j < len(slits)
         assert lv >= 6 and shift >= 0 and 0 <= ix < (1 << lv) and 0 <= iy < (1 << lv), "cell outside the root square"
         x0, y0 = ix << shift, iy << shift
         x1, y1 = x0 + (1 << shift), y0 + (1 << shift)

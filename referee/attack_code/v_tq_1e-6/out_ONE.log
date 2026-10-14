@@ -1,0 +1,12 @@
+density coefficients read from density_ONE_n32.json
+design ONE: 1 slits, solver size n = 32; floating-point conformal radius 0.888888888889
+planning (branch-and-bound proofs of the kernel bounds):
+  slit 0 (class 0, a = 0.6931): r = 1.34403, B = 2.2, 86 interpolation nodes, quadrature nodes 45..45, 1.94e+03 kernel evaluations; planned in 0 s
+  slit 0 (class 0): max |f| at nodes <= 6.474e-07, sum of |coefficients| <= 3.554e-05, interpolation remainder <= 6.3e-10; sup |U| <= 3.554e-05   [1 s]
+Traceback (most recent call last):
+  File "C:\Users\wvs00\claude_chat\bloch_record\referee\attack_code\v_tq_1e-6\conformal_certificate.py", line 419, in <module>
+    lower = certify(name, n, procs)
+  File "C:\Users\wvs00\claude_chat\bloch_record\referee\attack_code\v_tq_1e-6\conformal_certificate.py", line 400, in certify
+    assert delta >= 0
+           ^^^^^^^^^^
+AssertionError

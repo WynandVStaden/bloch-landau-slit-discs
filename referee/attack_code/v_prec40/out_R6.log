@@ -1,0 +1,15 @@
+density coefficients read from density_R6_n48.json
+design R6: 6 slits, solver size n = 48; floating-point conformal radius 1.520743036313
+planning (branch-and-bound proofs of the kernel bounds):
+Traceback (most recent call last):
+  File "C:\Users\wvs00\claude_chat\bloch_record\referee\attack_code\v_prec40\conformal_certificate.py", line 419, in <module>
+    lower = certify(name, n, procs)
+  File "C:\Users\wvs00\claude_chat\bloch_record\referee\attack_code\v_prec40\conformal_certificate.py", line 370, in certify
+    pl = plan(geo, coef, log)
+  File "C:\Users\wvs00\claude_chat\bloch_record\referee\attack_code\v_prec40\conformal_certificate.py", line 231, in plan
+    a_half, r = ellipse(b)
+                ~~~~~~~^^^
+  File "C:\Users\wvs00\claude_chat\bloch_record\referee\attack_code\v_prec40\conformal_certificate.py", line 201, in ellipse
+    assert ra > 1 and (ra + 1 / ra) / 2 < arb(a_half) and (ra - 1 / ra) / 2 < arb(b), "ellipse not inside the rectangle"
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ellipse not inside the rectangle

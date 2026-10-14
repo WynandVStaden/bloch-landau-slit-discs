@@ -1,0 +1,17 @@
+true domain                                                eps=1e-9     expect CERTIFIED -> CERTIFIED (4993 leaves, max level 32)
+true domain                                                eps=1e-10    expect ?         -> refused: NOT CERTIFIED: the search could not cover the domain; EPS is
+true domain                                                eps=0        expect refused   -> refused: NOT CERTIFIED: the search could not cover the domain; EPS is
+true domain                                                eps=-1e-9    expect refused   -> refused: NOT CERTIFIED: the search could not cover the domain; EPS is
+true domain                                                eps=-1e-12   expect refused   -> refused: NOT CERTIFIED: the search could not cover the domain; EPS is
+true domain                                                eps=-3       expect refused   -> refused: NOT CERTIFIED: the search could not cover the domain; EPS is
+class0 tip 1 -> 1.00000001 (unit disc grows to 1+1e-8)     eps=1e-9     expect refused   -> refused: NOT CERTIFIED: the search could not cover the domain; EPS is
+class0 tip 1 -> 1.000000002                                eps=1e-9     expect refused   -> refused: NOT CERTIFIED: the search could not cover the domain; EPS is
+class0 tip 1 -> 1.01                                       eps=1e-9     expect refused   -> refused: NOT CERTIFIED: the search could not cover the domain; EPS is
+class1 tip -> 2.00000001                                   eps=1e-9     expect refused   -> refused: NOT CERTIFIED: the search could not cover the domain; EPS is
+class1 tip -> 2.1                                          eps=1e-9     expect refused   -> refused: NOT CERTIFIED: the search could not cover the domain; EPS is
+class2 tip -> 2.78934242 (shortened by 1e-8)               eps=1e-9     expect refused   -> refused: NOT CERTIFIED: the search could not cover the domain; EPS is
+class2 tip -> 2.9                                          eps=1e-9     expect refused   -> refused: NOT CERTIFIED: the search could not cover the domain; EPS is
+class3 tip -> 3.47338126 (shortened by 1.2e-8)             eps=1e-9     expect refused   -> refused: NOT CERTIFIED: the search could not cover the domain; EPS is
+class4 tip -> 4.3428742 (shortened by 1.5e-8)              eps=1e-9     expect refused   -> refused: NOT CERTIFIED: the search could not cover the domain; EPS is
+class4 tip -> 4.9                                          eps=1e-9     expect refused   -> refused: NOT CERTIFIED: the search could not cover the domain; EPS is
+class4 removed                                             eps=1e-9     expect refused   -> refused: NOT CERTIFIED: the search could not cover the domain; EPS is

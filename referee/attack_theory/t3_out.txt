@@ -1,0 +1,165 @@
+C:\Users\wvs00\claude_chat\bloch_record\referee\attack_theory\t3_lemmas.py:14: RuntimeWarning: invalid value encountered in multiply
+  ratio = np.abs(al[1:])*(r**k + r**-k)/(4*A)
+Lemma 4.6
+  4.6 1/(x-x0) pole real axis eps=0.001      r=1.010 A=1.000e+03 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.0208 at k=1
+  4.6 i/(x-x0) pole real axis eps=0.001      r=1.010: Re h = 0 on [-1,1], trivial
+  4.6 c/(x-x0)^2 pole real axis eps=0.001    r=1.010 A=4.028e+05 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.0077 at k=1
+  4.6 log(1-x/x0) pole real axis eps=0.001   r=1.010 A=6.909e+00 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.1383 at k=1
+  4.6 1/(x-x0) pole imag axis eps=0.001      r=1.010 A=3.180e+03 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.0003 at k=1
+  4.6 i/(x-x0) pole imag axis eps=0.001      r=1.010 A=1.005e+05 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.0000 at k=2
+  4.6 c/(x-x0)^2 pole imag axis eps=0.001    r=1.010 A=3.030e+09 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.0000 at k=3459
+  4.6 log(1-x/x0) pole imag axis eps=0.001   r=1.010 A=6.909e+00 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.0710 at k=2
+  4.6 1/(x-x0) pole generic eps=0.001        r=1.010 A=4.119e+04 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.0000 at k=8
+  4.6 i/(x-x0) pole generic eps=0.001        r=1.010 A=3.403e+04 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.0000 at k=3
+  4.6 c/(x-x0)^2 pole generic eps=0.001      r=1.010 A=2.405e+09 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.0000 at k=3441
+  4.6 log(1-x/x0) pole generic eps=0.001     r=1.010 A=1.027e+01 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.0521 at k=1
+  4.6 1/(x-x0) pole real axis eps=0.1        r=1.010 A=1.000e+01 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.1400 at k=1
+  4.6 i/(x-x0) pole real axis eps=0.1        r=1.010: Re h = 0 on [-1,1], trivial
+  4.6 c/(x-x0)^2 pole real axis eps=0.1      r=1.010 A=3.020e+01 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.1031 at k=1
+  4.6 log(1-x/x0) pole real axis eps=0.1     r=1.010 A=2.398e+00 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.2676 at k=1
+  4.6 1/(x-x0) pole imag axis eps=0.1        r=1.010 A=5.017e+02 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.0020 at k=1
+  4.6 i/(x-x0) pole imag axis eps=0.1        r=1.010 A=1.005e+03 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.0010 at k=2
+  4.6 c/(x-x0)^2 pole imag axis eps=0.1      r=1.010 A=6.475e+05 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.0002 at k=1005
+  4.6 log(1-x/x0) pole imag axis eps=0.1     r=1.010 A=4.515e+00 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.1084 at k=2
+  4.6 1/(x-x0) pole generic eps=0.1          r=1.010 A=4.169e+02 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.0028 at k=5
+  4.6 i/(x-x0) pole generic eps=0.1          r=1.010 A=8.267e+02 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.0014 at k=3
+  4.6 c/(x-x0)^2 pole generic eps=0.1        r=1.010 A=4.556e+05 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.0004 at k=651
+  4.6 log(1-x/x0) pole generic eps=0.1       r=1.010 A=6.198e+00 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.0948 at k=1
+  4.6 exp(3ix)                               r=1.010 A=1.030e+00 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.4719 at k=2
+  4.6 T_1                                    r=1.010 A=1.000e+00 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.5000 at k=1
+  4.6 (1+2i)T_1                              r=1.010 A=1.000e+00 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.4999 at k=1
+  4.6 T_2                                    r=1.010 A=1.000e+00 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.5000 at k=2
+  4.6 (1+2i)T_2                              r=1.010 A=1.001e+00 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.4996 at k=2
+  4.6 T_7                                    r=1.010 A=1.002e+00 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.5000 at k=7
+  4.6 (1+2i)T_7                              r=1.010 A=1.012e+00 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.4952 at k=7
+  4.6 1/(x-x0) pole real axis eps=0.001      r=1.100 A=9.955e+02 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.0086 at k=1
+  4.6 i/(x-x0) pole real axis eps=0.001      r=1.100: Re h = 0 on [-1,1], trivial
+  4.6 c/(x-x0)^2 pole real axis eps=0.001    r=1.100 A=6.454e+05 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.0008 at k=90
+  4.6 log(1-x/x0) pole real axis eps=0.001   r=1.100 A=6.909e+00 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.1309 at k=1
+  4.6 1/(x-x0) pole imag axis eps=0.001      r=1.100 A=2.903e+03 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.0003 at k=1
+  4.6 i/(x-x0) pole imag axis eps=0.001      r=1.100 A=1.048e+04 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.0001 at k=2
+  4.6 c/(x-x0)^2 pole imag axis eps=0.001    r=1.100 A=3.293e+07 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.0000 at k=361
+  4.6 log(1-x/x0) pole imag axis eps=0.001   r=1.100 A=6.909e+00 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.0609 at k=2
+  4.6 1/(x-x0) pole generic eps=0.001        r=1.100 A=3.456e+03 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.0003 at k=2
+  4.6 i/(x-x0) pole generic eps=0.001        r=1.100 A=8.607e+03 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.0001 at k=3
+  4.6 c/(x-x0)^2 pole generic eps=0.001      r=1.100 A=8.446e+06 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.0000 at k=351
+  4.6 log(1-x/x0) pole generic eps=0.001     r=1.100 A=8.469e+00 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.0583 at k=1
+  4.6 1/(x-x0) pole real axis eps=0.1        r=1.100 A=9.955e+00 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.1363 at k=1
+  4.6 i/(x-x0) pole real axis eps=0.1        r=1.100: Re h = 0 on [-1,1], trivial
+  4.6 c/(x-x0)^2 pole real axis eps=0.1      r=1.100 A=3.934e+01 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.0737 at k=1
+  4.6 log(1-x/x0) pole real axis eps=0.1     r=1.100 A=2.398e+00 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.2660 at k=1
+  4.6 1/(x-x0) pole imag axis eps=0.1        r=1.100 A=5.236e+01 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.0172 at k=1
+  4.6 i/(x-x0) pole imag axis eps=0.1        r=1.100 A=1.048e+02 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.0078 at k=2
+  4.6 c/(x-x0)^2 pole imag axis eps=0.1      r=1.100 A=7.288e+03 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.0021 at k=105
+  4.6 log(1-x/x0) pole imag axis eps=0.1     r=1.100 A=2.398e+00 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.1722 at k=2
+  4.6 1/(x-x0) pole generic eps=0.1          r=1.100 A=4.623e+01 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.0213 at k=2
+  4.6 i/(x-x0) pole generic eps=0.1          r=1.100 A=8.640e+01 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.0098 at k=3
+  4.6 c/(x-x0)^2 pole generic eps=0.1        r=1.100 A=5.255e+03 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.0032 at k=66
+  4.6 log(1-x/x0) pole generic eps=0.1       r=1.100 A=3.955e+00 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.1351 at k=1
+  4.6 exp(3ix)                               r=1.100 A=1.332e+00 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.3717 at k=2
+  4.6 T_1                                    r=1.100 A=1.005e+00 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.5000 at k=1
+  4.6 (1+2i)T_1                              r=1.100 A=1.023e+00 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.4912 at k=1
+  4.6 T_2                                    r=1.100 A=1.018e+00 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.5000 at k=2
+  4.6 (1+2i)T_2                              r=1.100 A=1.088e+00 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.4679 at k=2
+  4.6 T_7                                    r=1.100 A=1.231e+00 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.5000 at k=7
+  4.6 (1+2i)T_7                              r=1.100 A=1.891e+00 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.3255 at k=7
+  4.6 1/(x-x0) pole real axis eps=0.001      r=1.500 A=9.231e+02 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.0019 at k=1
+  4.6 i/(x-x0) pole real axis eps=0.001      r=1.500: Re h = 0 on [-1,1], trivial
+  4.6 c/(x-x0)^2 pole real axis eps=0.001    r=1.500 A=5.609e+05 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.0001 at k=82
+  4.6 log(1-x/x0) pole real axis eps=0.001   r=1.500 A=6.909e+00 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.1043 at k=1
+  4.6 1/(x-x0) pole imag axis eps=0.001      r=1.500 A=1.176e+03 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.0006 at k=1
+  4.6 i/(x-x0) pole imag axis eps=0.001      r=1.500 A=2.400e+03 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.0002 at k=2
+  4.6 c/(x-x0)^2 pole imag axis eps=0.001    r=1.500 A=2.915e+06 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.0000 at k=83
+  4.6 log(1-x/x0) pole imag axis eps=0.001   r=1.500 A=6.909e+00 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.0433 at k=2
+  4.6 1/(x-x0) pole generic eps=0.001        r=1.500 A=1.271e+03 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.0005 at k=2
+  4.6 i/(x-x0) pole generic eps=0.001        r=1.500 A=2.002e+03 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.0003 at k=1
+  4.6 c/(x-x0)^2 pole generic eps=0.001      r=1.500 A=3.316e+06 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.0000 at k=84
+  4.6 log(1-x/x0) pole generic eps=0.001     r=1.500 A=7.221e+00 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.0541 at k=1
+  4.6 1/(x-x0) pole real axis eps=0.1        r=1.500 A=9.231e+00 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.0984 at k=1
+  4.6 i/(x-x0) pole real axis eps=0.1        r=1.500: Re h = 0 on [-1,1], trivial
+  4.6 c/(x-x0)^2 pole real axis eps=0.1      r=1.500 A=5.098e+01 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.0234 at k=1
+  4.6 log(1-x/x0) pole real axis eps=0.1     r=1.500 A=2.398e+00 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.2456 at k=1
+  4.6 1/(x-x0) pole imag axis eps=0.1        r=1.500 A=1.191e+01 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.0531 at k=1
+  4.6 i/(x-x0) pole imag axis eps=0.1        r=1.500 A=2.400e+01 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.0210 at k=2
+  4.6 c/(x-x0)^2 pole imag axis eps=0.1      r=1.500 A=3.816e+02 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.0085 at k=25
+  4.6 log(1-x/x0) pole imag axis eps=0.1     r=1.500 A=2.398e+00 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.1157 at k=2
+  4.6 1/(x-x0) pole generic eps=0.1          r=1.500 A=1.289e+01 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.0444 at k=2
+  4.6 i/(x-x0) pole generic eps=0.1          r=1.500 A=2.015e+01 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.0287 at k=1
+  4.6 c/(x-x0)^2 pole generic eps=0.1        r=1.500 A=3.331e+02 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.0103 at k=19
+  4.6 log(1-x/x0) pole generic eps=0.1       r=1.500 A=2.735e+00 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.1458 at k=1
+  4.6 exp(3ix)                               r=1.500 A=3.490e+00 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.1876 at k=2
+  4.6 T_1                                    r=1.500 A=1.083e+00 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.5000 at k=1
+  4.6 (1+2i)T_1                              r=1.500 A=1.367e+00 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.3963 at k=1
+  4.6 T_2                                    r=1.500 A=1.347e+00 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.5000 at k=2
+  4.6 (1+2i)T_2                              r=1.500 A=2.253e+00 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.2990 at k=2
+  4.6 T_7                                    r=1.500 A=8.572e+00 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.5000 at k=7
+  4.6 (1+2i)T_7                              r=1.500 A=1.906e+01 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.2248 at k=7
+  4.6 1/(x-x0) pole real axis eps=0.001      r=3.000 A=6.000e+02 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.0007 at k=1
+  4.6 i/(x-x0) pole real axis eps=0.001      r=3.000: Re h = 0 on [-1,1], trivial
+  4.6 c/(x-x0)^2 pole real axis eps=0.001    r=3.000 A=2.359e+05 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.0000 at k=29
+  4.6 log(1-x/x0) pole real axis eps=0.001   r=3.000 A=6.909e+00 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.0803 at k=1
+  4.6 1/(x-x0) pole imag axis eps=0.001      r=3.000 A=3.699e+02 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.0009 at k=1
+  4.6 i/(x-x0) pole imag axis eps=0.001      r=3.000 A=7.500e+02 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.0004 at k=2
+  4.6 c/(x-x0)^2 pole imag axis eps=0.001    r=3.000 A=3.724e+05 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.0000 at k=29
+  4.6 log(1-x/x0) pole imag axis eps=0.001   r=3.000 A=6.909e+00 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.0366 at k=2
+  4.6 1/(x-x0) pole generic eps=0.001        r=3.000 A=5.136e+02 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.0006 at k=2
+  4.6 i/(x-x0) pole generic eps=0.001        r=3.000 A=6.679e+02 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.0005 at k=13
+  4.6 c/(x-x0)^2 pole generic eps=0.001      r=3.000 A=4.169e+05 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.0000 at k=28
+  4.6 log(1-x/x0) pole generic eps=0.001     r=3.000 A=6.915e+00 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.0434 at k=1
+  4.6 1/(x-x0) pole real axis eps=0.1        r=3.000 A=6.000e+00 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.0536 at k=1
+  4.6 i/(x-x0) pole real axis eps=0.1        r=3.000: Re h = 0 on [-1,1], trivial
+  4.6 c/(x-x0)^2 pole real axis eps=0.1      r=3.000 A=2.326e+01 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.0099 at k=7
+  4.6 log(1-x/x0) pole real axis eps=0.1     r=3.000 A=2.398e+00 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.2063 at k=1
+  4.6 1/(x-x0) pole imag axis eps=0.1        r=3.000 A=3.634e+00 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.0797 at k=1
+  4.6 i/(x-x0) pole imag axis eps=0.1        r=3.000 A=7.500e+00 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.0326 at k=2
+  4.6 c/(x-x0)^2 pole imag axis eps=0.1      r=3.000 A=3.693e+01 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.0173 at k=13
+  4.6 log(1-x/x0) pole imag axis eps=0.1     r=3.000 A=2.398e+00 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.0904 at k=2
+  4.6 1/(x-x0) pole generic eps=0.1          r=3.000 A=5.136e+00 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.0485 at k=2
+  4.6 i/(x-x0) pole generic eps=0.1          r=3.000 A=6.651e+00 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.0400 at k=1
+  4.6 c/(x-x0)^2 pole generic eps=0.1        r=3.000 A=4.247e+01 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.0149 at k=9
+  4.6 log(1-x/x0) pole generic eps=0.1       r=3.000 A=2.417e+00 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.1168 at k=1
+  4.6 exp(3ix)                               r=3.000 A=5.460e+01 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.0980 at k=4
+  4.6 T_1                                    r=3.000 A=1.667e+00 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.5000 at k=1
+  4.6 (1+2i)T_1                              r=3.000 A=3.145e+00 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.2650 at k=1
+  4.6 T_2                                    r=3.000 A=4.556e+00 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.5000 at k=2
+  4.6 (1+2i)T_2                              r=3.000 A=9.988e+00 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.2280 at k=2
+  4.6 T_7                                    r=3.000 A=1.094e+03 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.5000 at k=7
+  4.6 (1+2i)T_7                              r=3.000 A=2.445e+03 max ratio |alpha_k|(r^k+r^-k)/(4A) = 0.2236 at k=7
+  random search over complex polynomials (deg<=12), 20000 trials per r
+    r=1.01 best ratio found 0.5096
+    r=1.30 best ratio found 0.4621
+    r=2.50 best ratio found 0.4986
+  WORST ratio overall (must be <= 1): 0.5095668378959132
+Lemma 4.5
+  n= 1 x=-1.00  integral=-inf  (pi/n)T_n=-3.14159265358979
+  n= 1 x=-0.30  integral=-0.94247779607694  (pi/n)T_n=-0.94247779607694
+  n= 1 x= 0.00  integral=+0.00000000000000  (pi/n)T_n=-0.00000000000000
+  n= 1 x= 0.77  integral=+2.41902634326414  (pi/n)T_n=+2.41902634326414
+  n= 1 x= 1.00  integral=+inf  (pi/n)T_n=+3.14159265358979
+  n= 2 x=-1.00  integral=+inf  (pi/n)T_n=+1.57079632679490
+  n= 2 x=-0.30  integral=-1.28805298797182  (pi/n)T_n=-1.28805298797182
+  n= 2 x= 0.00  integral=-1.57079632679490  (pi/n)T_n=-1.57079632679490
+  n= 2 x= 0.77  integral=+0.29185395751849  (pi/n)T_n=+0.29185395751849
+  n= 2 x= 1.00  integral=+inf  (pi/n)T_n=+1.57079632679490
+  n= 3 x=-1.00  integral=-inf  (pi/n)T_n=-1.04719755119660
+  n= 3 x=-0.30  integral=+0.82938046054771  (pi/n)T_n=+0.82938046054771
+  n= 3 x= 0.00  integral=+0.00000000000000  (pi/n)T_n=+0.00000000000000
+  n= 3 x= 0.77  integral=-0.50670538470240  (pi/n)T_n=-0.50670538470240
+  n= 3 x= 1.00  integral=+inf  (pi/n)T_n=+1.04719755119660
+  n= 7 x=-1.00  integral=-inf  (pi/n)T_n=-0.44879895051283
+  n= 7 x=-0.30  integral=+0.37975715612258  (pi/n)T_n=+0.37975715612258
+  n= 7 x= 0.00  integral=+0.00000000000000  (pi/n)T_n=+0.00000000000000
+  n= 7 x= 0.77  integral=+0.05875690777559  (pi/n)T_n=+0.05875690777559
+  n= 7 x= 1.00  integral=+inf  (pi/n)T_n=+0.44879895051283
+  n=20 x=-1.00  integral=+inf  (pi/n)T_n=+0.15707963267949
+  n=20 x=-0.30  integral=+0.15427264022956  (pi/n)T_n=+0.15427264022956
+  n=20 x= 0.00  integral=+0.15707963267949  (pi/n)T_n=+0.15707963267949
+  n=20 x= 0.77  integral=+0.04612951068785  (pi/n)T_n=+0.04612951068785
+  n=20 x= 1.00  integral=+inf  (pi/n)T_n=+0.15707963267949
+  n=0: integral = 2.177586090303602132948809  pi log 2 = 2.177586090303602130500689 (n=0 would need this term; not needed since c_{j,0}=0)
+Lemma 4.7 (quadrature)
+  max err/bound over random trials (must be <= 1): 0.013761824248194913
+Lemma 4.8 (interpolation)
+  aliasing identity max defect: 1.7703893906428902e-13
+  max ||f-p|| / (2C r^(1-M)/(r-1)) = 0.38283194217312044  ; max ||f-p|| / (2 sum_{k>=M}|phi_k|) = 0.9741869254024552 (both must be <= 1)
+  T_{M+1}: interpolant coefficients nonzero: {9: -1.0}  ||f-p|| = 2.0000000000000107

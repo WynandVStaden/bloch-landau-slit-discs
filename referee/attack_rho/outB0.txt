@@ -1,0 +1,10 @@
+B0 P= 2 q= 8 gb=0 gt=0 n/arc=  16 rho=1.523726805781086 diff=            cond=4.3e+02
+B0 P= 4 q= 8 gb=0 gt=0 n/arc=  32 rho=1.523726248648682 diff= -5.571e-07 cond=5.8e+02
+B0 P= 4 q=12 gb=0 gt=0 n/arc=  48 rho=1.523726248804018 diff= +1.553e-10 cond=1.1e+03
+B0 P= 8 q=12 gb=0 gt=0 n/arc=  96 rho=1.523726248805210 diff= +1.191e-12 cond=2.2e+03
+B0 P= 8 q=16 gb=0 gt=0 n/arc= 128 rho=1.523726248805209 diff= -1.332e-15 cond=3.8e+03
+B0 P=12 q=16 gb=0 gt=0 n/arc= 192 rho=1.523726248805209 diff= +4.441e-16 cond=5.8e+03
+B0 P= 8 q=16 gb=3 gt=0 n/arc= 176 rho=1.523726248805210 diff= +8.882e-16 cond=3.1e+04
+B0 P=12 q=16 gb=4 gt=2 n/arc= 288 rho=1.523726248805209 diff= -1.332e-15 cond=9.8e+04
+B0 P=16 q=16 gb=6 gt=0 n/arc= 352 rho=1.523726248805209 diff= +4.441e-16 cond=4.9e+05
+harmonic measure per class: [0.72848985 0.18021451 0.05716424 0.01885171 0.00731047]  sum: 0.9920307762869899

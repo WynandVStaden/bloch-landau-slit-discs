@@ -1,0 +1,12 @@
+density coefficients read from density_ONE_n32.json
+design ONE: 1 slits, solver size n = 32; floating-point conformal radius 0.888888888889
+planning (branch-and-bound proofs of the kernel bounds):
+Traceback (most recent call last):
+  File "C:\Users\wvs00\claude_chat\bloch_record\referee\attack_code\v_even\conformal_certificate.py", line 419, in <module>
+    lower = certify(name, n, procs)
+  File "C:\Users\wvs00\claude_chat\bloch_record\referee\attack_code\v_even\conformal_certificate.py", line 370, in certify
+    pl = plan(geo, coef, log)
+  File "C:\Users\wvs00\claude_chat\bloch_record\referee\attack_code\v_even\conformal_certificate.py", line 219, in plan
+    assert all(v == 0.0 for v in vals[0::2]), "the density polynomials must be odd"
+           ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: the density polynomials must be odd

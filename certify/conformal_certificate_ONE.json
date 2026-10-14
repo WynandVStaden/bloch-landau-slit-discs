@@ -38,5 +38,22 @@
   ]
  },
  "delta_upper": 6.305806688822431e-10,
- "conformal_radius_lower": 0.888888888327
+ "c_lower": -0.1177830356565,
+ "conformal_radius_lower": 0.888888888327,
+ "precision_bits": 100,
+ "python_flint": "0.9.0",
+ "python": "3.14.3",
+ "processes": 4,
+ "plan": {
+  "0": {
+   "b": 0.3,
+   "rho": 1.344030650889711,
+   "B": 2.2139557345258374,
+   "M": 86,
+   "interp_err": 6.264437461262661e-10,
+   "N": {
+    "0": 72
+   }
+  }
+ }
 }

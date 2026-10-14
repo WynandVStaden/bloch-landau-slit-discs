@@ -1,0 +1,12 @@
+density coefficients read from density_R6_n48.json
+design R6: 6 slits, solver size n = 48; floating-point conformal radius 1.520743036313
+planning (branch-and-bound proofs of the kernel bounds):
+  slit 0 (class 0, a = 1.0986): r = 1.34403, B = 5.1, 128 interpolation nodes, quadrature nodes 92..96, 3.61e+04 kernel evaluations; planned in 0 s
+  slit 3 (class 1, a = 0.4055): r = 1.34403, B = 3.0, 126 interpolation nodes, quadrature nodes 92..96, 3.55e+04 kernel evaluations; planned in 0 s
+  slit 0 (class 0): max |f| at nodes <= 1.036e-15, sum of |coefficients| <= 6.336e-15, interpolation remainder <= 5.8e-15; sup |U| <= 1.217e-14   [1 s]
+  slit 3 (class 1): max |f| at nodes <= 2.109e-16, sum of |coefficients| <= 4.360e-15, interpolation remainder <= 6.3e-15; sup |U| <= 1.065e-14   [0 s]
+RHO_LOWER_BALL [1.520743036312491784466058 +/- 2.39e-25] DELTA [1.21728052592e-14 +/- 3.01e-26]
+delta = 1.217e-14
+c = L - (pi/4) sum a_j c_j1 = 0.4191990550943
+CERTIFIED: conformal radius of design R6 >= 1.520743036311   (floating-point value 1.520743036313); total time 2 s
+exact value (closed form) 1.520743036313; certified lower bound is below it by 1.51e-12

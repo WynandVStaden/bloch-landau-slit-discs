@@ -1,0 +1,34 @@
+   N=48 refinement 0: max residual 4.69e-14  rho = 1.52372624880632561189409748554
+   N=48 refinement 1: max residual 1.37e-28  rho = 1.52372624880632623570983050827
+   N=48 refinement 2: max residual 6.2e-34  rho = 1.52372624880632623570983050838
+N=  48 rho=1.52372624880632623570983050838  C-C_id=1.2e-34 tails=['5.7e-06', '2.7e-06', '2.7e-06', '9.6e-07', '2.8e-31'] (assembly 5s, total 6s)
+   N=64 refinement 0: max residual 5.18e-14  rho = 1.52372624880521248910935786139
+   N=64 refinement 1: max residual 8.39e-28  rho = 1.52372624880521399710153643899
+   N=64 refinement 2: max residual 6.02e-34  rho = 1.52372624880521399710153643878
+N=  64 rho=1.52372624880521399710153643878  C-C_id=7.22e-35 tails=['3.0e-07', '5.7e-08', '2.8e-07', '6.1e-08', '8.3e-31'] (assembly 10s, total 11s)
+      diff to previous N: -1.1122e-12
+   N=96 refinement 0: max residual 2.3e-13  rho = 1.52372624880520910575742856286
+   N=96 refinement 1: max residual 1.31e-27  rho = 1.5237262488052089110723339389
+   N=96 refinement 2: max residual 1.06e-33  rho = 1.52372624880520891107233393932
+N=  96 rho=1.52372624880520891107233393932  C-C_id=9.63e-35 tails=['3.5e-09', '5.0e-11', '4.3e-09', '9.1e-10', '9.7e-31'] (assembly 22s, total 24s)
+      diff to previous N: -5.086e-15
+   N=128 refinement 0: max residual 1.69e-13  rho = 1.52372624880520741408146391359
+   N=128 refinement 1: max residual 1.47e-27  rho = 1.52372624880520891104534993173
+   N=128 refinement 2: max residual 1.16e-33  rho = 1.5237262488052089110453499306
+N= 128 rho=1.5237262488052089110453499306  C-C_id=7.22e-35 tails=['7.1e-11', '1.6e-13', '1.0e-10', '1.1e-11', '1.5e-30'] (assembly 45s, total 52s)
+      diff to previous N: -2.6984e-20
+   N=192 refinement 0: max residual 3.94e-13  rho = 1.52372624880520741408146391359
+   N=192 refinement 1: max residual 2.59e-27  rho = 1.52372624880520891104799408679
+   N=192 refinement 2: max residual 1.53e-33  rho = 1.52372624880520891104799408817
+N= 192 rho=1.52372624880520891104799408817  C-C_id=-1.44e-34 tails=['1.0e-13', '1.2e-18', '2.1e-13', '1.2e-14', '2.5e-30'] (assembly 143s, total 156s)
+      diff to previous N: 2.6442e-21
+   N=256 refinement 0: max residual 4.59e-13  rho = 1.52372624880521215077416493153
+   N=256 refinement 1: max residual 5.43e-27  rho = 1.52372624880520891104799447637
+   N=256 refinement 2: max residual 1.94e-33  rho = 1.52372624880520891104799447612
+N= 256 rho=1.52372624880520891104799447612  C-C_id=1.69e-34 tails=['1.2e-16', '4.2e-24', '5.4e-16', '1.7e-17', '3.3e-30'] (assembly 238s, total 259s)
+      diff to previous N: 3.8795e-25
+   N=320 refinement 0: max residual 7.36e-13  rho = 1.52372624880521113576858614197
+   N=320 refinement 1: max residual 1.0e-26  rho = 1.52372624880520891104799448052
+   N=320 refinement 2: max residual 2.14e-33  rho = 1.5237262488052089110479944763
+N= 320 rho=1.5237262488052089110479944763  C-C_id=-2.41e-35 tails=['1.7e-19', '3.1e-28', '2.8e-18', '2.5e-20', '2.4e-30'] (assembly 432s, total 465s)
+      diff to previous N: 1.8294e-28

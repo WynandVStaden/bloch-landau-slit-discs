@@ -1,0 +1,17 @@
+density coefficients read from density_G_n64.json
+design G: 24 slits, solver size n = 64; floating-point conformal radius 1.523726248805
+planning (branch-and-bound proofs of the kernel bounds):
+  slit 0 (class 0, a = 1.6097): r = 1.01858, B = 9.8, 1580 interpolation nodes, quadrature nodes 79..1120, 3.22e+06 kernel evaluations; planned in 1 s
+  slit 3 (class 1, a = 0.9165): r = 1.03460, B = 6.8, 828 interpolation nodes, quadrature nodes 78..571, 1.23e+06 kernel evaluations; planned in 1 s
+  slit 6 (class 2, a = 0.5839): r = 1.01601, B = 9.0, 1836 interpolation nodes, quadrature nodes 78..1070, 3.16e+06 kernel evaluations; planned in 1 s
+  slit 12 (class 3, a = 0.3645): r = 1.03087, B = 5.8, 924 interpolation nodes, quadrature nodes 78..565, 1.24e+06 kernel evaluations; planned in 1 s
+  slit 18 (class 4, a = 0.1411): r = 1.34403, B = 4.1, 88 interpolation nodes, quadrature nodes 76..93, 8.76e+04 kernel evaluations; planned in 1 s
+  slit 0 (class 0): max |f| at nodes <= 1.746e-08, sum of |coefficients| <= 2.382e-08, interpolation remainder <= 9.9e-10; sup |U| <= 2.482e-08   [8 s]
+  slit 3 (class 1): max |f| at nodes <= 2.443e-10, sum of |coefficients| <= 1.505e-09, interpolation remainder <= 9.5e-10; sup |U| <= 2.459e-09   [3 s]
+  slit 6 (class 2): max |f| at nodes <= 8.038e-09, sum of |coefficients| <= 1.413e-08, interpolation remainder <= 9.9e-10; sup |U| <= 1.512e-08   [7 s]
+  slit 12 (class 3): max |f| at nodes <= 4.370e-10, sum of |coefficients| <= 1.657e-09, interpolation remainder <= 9.8e-10; sup |U| <= 2.638e-09   [3 s]
+  slit 18 (class 4): max |f| at nodes <= 1.697e-12, sum of |coefficients| <= 9.513e-11, interpolation remainder <= 6.5e-10; sup |U| <= 7.414e-10   [0 s]
+RHO_LOWER_BALL [1.523726210991536690608772 +/- 8.00e-26] DELTA [2.48165537274e-8 +/- 4.67e-20]
+delta = 2.482e-08
+c = L - (pi/4) sum a_j c_j1 = 0.4211588143614
+CERTIFIED: conformal radius of design G >= 1.523726210990   (floating-point value 1.523726248805); total time 27 s
