@@ -91,4 +91,7 @@ The domain, the numerical method, the programs, the proof and the documents in t
 
 ## Licence
 
-No licence has been granted yet; all rights reserved until publication.
+- Code and data (`*.py`, `*.json`, `*.npz`, logs): [MIT licence](LICENSE).
+- Paper, documentation and figures: [CC BY 4.0](LICENSE-docs.md).
+
+If you use this work, please cite the paper.
