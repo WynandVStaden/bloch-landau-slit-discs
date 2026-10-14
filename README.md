@@ -1,6 +1,6 @@
 # An improved upper bound for the univalent Bloch–Landau constant
 
-> **Status: private draft, not submitted or published.** The proof has been audited by an AI reviewer but not yet by a human mathematician. Please do not circulate.
+> **Status:** the result and its computer-assisted proof have not yet been peer reviewed.
 
 This repository contains a slit domain, a computer-assisted proof, and all the code behind the bound
 
