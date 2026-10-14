@@ -12,7 +12,7 @@ import sys
 import numpy as np
 
 sys.path.insert(0, "..")
-import bloch_curved2 as b  # noqa: E402
+import bloch_slits as b  # noqa: E402
 from bloch_residual import solve  # noqa: E402
 from bloch_solver import phi  # noqa: E402
 from designs import DESIGNS  # noqa: E402

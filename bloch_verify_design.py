@@ -1,6 +1,6 @@
 """Full independent checks of a design in the flexible curved family (bloch_curved2.py), and a picture of it.
 
-Usage: python bloch_verify_curved2.py <params as printed by the search>
+Usage: python bloch_verify_design.py <params as printed by the search>
 """
 import sys
 
@@ -8,7 +8,7 @@ import numpy as np
 from scipy.optimize import minimize
 from scipy.spatial import cKDTree
 
-import bloch_curved2 as b
+import bloch_slits as b
 import bloch_residual as br
 from bloch_solver import conformal_radius
 

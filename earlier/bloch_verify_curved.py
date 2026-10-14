@@ -2,6 +2,11 @@
 
 Usage: python bloch_verify_curved.py R t2 [angle tip bend]...   (angles in radians)
 """
+import os as _os
+import sys as _sys
+
+_sys.path.append(_os.path.dirname(_os.path.dirname(_os.path.abspath(__file__))))  # shared modules in the parent folder
+
 import sys
 
 import numpy as np

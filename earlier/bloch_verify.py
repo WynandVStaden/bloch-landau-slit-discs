@@ -10,6 +10,11 @@ Checks
     independent finite-difference-free route: the same solver on the design
     rotated by a random angle (the value must not change).
 """
+import os as _os
+import sys as _sys
+
+_sys.path.append(_os.path.dirname(_os.path.dirname(_os.path.abspath(__file__))))  # shared modules in the parent folder
+
 import sys
 
 import numpy as np

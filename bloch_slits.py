@@ -1,6 +1,6 @@
 """Slit designs with more flexible curved slits, and a differential-evolution search over them.
 
-As in bloch_curved.py, but a slit is now, in the coordinate w = log z,
+As in earlier/bloch_curved.py, but a slit is now, in the coordinate w = log z,
 
     w(x) = log R + s + i (alpha + b1 s^2 + b2 s^4),   s = a x,  -1 <= x <= 0,  a = log(R / tip).
 
@@ -8,7 +8,7 @@ Only even powers of s appear, so the slit together with its reflection in the
 circle is still one analytic arc and bloch_solver.conformal_radius applies
 unchanged.
 
-Usage: python bloch_curved2.py n_extra_classes [seed] [maxiter]
+Usage: python bloch_slits.py n_extra_classes [seed] [maxiter]
 """
 import os
 import sys

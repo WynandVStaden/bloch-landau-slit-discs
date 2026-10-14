@@ -75,21 +75,15 @@ and (1 + 10⁻⁹) / 1.523726208329 < 0.65628589.
 | `designs.py` | the three domains A, B, G: recomputes their ratios in floating point and draws them |
 | `bloch_solver.py` | conformal radius of a slit disc (floating point); run it to see the self-test |
 | `bloch_explicit.py` | exact conformal radius of the classical six-slit disc |
-| `bloch_design.py`, `bloch_curved.py`, `bloch_curved2.py` | inradius routines and search objectives for straight, one-bend and two-bend slits |
-| `bloch_evolve.py`, `bloch_evolve2.py` | differential-evolution searches (`bloch_curved2.py` contains the one that found G) |
-| `bloch_verify*.py`, `bloch_residual.py` | floating-point cross-checks of a domain |
+| `bloch_slits.py` | the slit family of the paper: inradius routine and the differential-evolution search that found G |
+| `bloch_verify_design.py` | floating-point cross-checks of a domain (brute-force inradius, convergence, rotation) |
+| `bloch_residual.py`, `bloch_design.py` | the solver's residual on the slits; straight-slit helpers used by it |
+| `earlier/` | superseded models and searches (straight slits, slits with one bend), kept to reproduce domains A and B and the six- and twelve-slit checks |
 | `referee/` | scripts written by independent reviewers (different methods, no shared code) |
 | `logs/` | logs of the searches and checks |
 | `docs/` | primer, reproduction guide, literature notes |
 
 Only the two programs in `certify/` are part of the proof. Everything else is how the domain was found and cross-checked.
-
-## What is and is not established
-
-- **Proved by the programs in `certify/`:** U ≤ 0.65628589. The argument is written out in the paper. It relies on the [Arb](https://flintlib.org) library (now part of FLINT, used through python-flint) for ball arithmetic and on Python's integer arithmetic.
-- **Checked independently:** the inradius and conformal radius were recomputed by separately written code using different methods (`referee/`), and the proof and its programs were audited by a separate AI reviewer (`referee/certificate_audit/`), who found no fatal defect.
-- **Not yet done:** review by a human expert; consulting Beller and Hummel's 1985 paper directly; a final literature check before submission.
-- **Not claimed:** optimality. The domain is a local optimum of a small family.
 
 ## AI disclosure
 

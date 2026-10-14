@@ -11,6 +11,11 @@ bend = 0 is a straight radial slit. The conformal radius comes from
 bloch_solver (which already handles these curves exactly); this module
 supplies the inradius.
 """
+import os as _os
+import sys as _sys
+
+_sys.path.append(_os.path.dirname(_os.path.dirname(_os.path.abspath(__file__))))  # shared modules in the parent folder
+
 import numpy as np
 from scipy.spatial import cKDTree
 

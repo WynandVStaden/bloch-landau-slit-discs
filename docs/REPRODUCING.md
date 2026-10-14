@@ -104,7 +104,7 @@ Prints the computed conformal radius next to the exact one for a disc with one s
 ## 4. Extended floating-point checks of domain G (tens of minutes)
 
 ```
-python bloch_verify_curved2.py 5.001117628756668 1.9999999974092333 0.029930188727091613 2.789342409403121 0.9026921410641155 -0.3301459494660587 1.0157094972537686 3.473381248030611 -1.2656124700253997 0.9794269477754911 0.5757776442359243 4.342874184977691 0.03225521024585182 2.9360081049550737
+python bloch_verify_design.py 5.001117628756668 1.9999999974092333 0.029930188727091613 2.789342409403121 0.9026921410641155 -0.3301459494660587 1.0157094972537686 3.473381248030611 -1.2656124700253997 0.9794269477754911 0.5757776442359243 4.342874184977691 0.03225521024585182 2.9360081049550737
 ```
 
 The arguments are the outer radius, the tip radius of the slits at 60°, then (angle, tip radius, first bend, second bend) for the three curved classes. The script reports:
@@ -139,12 +139,12 @@ The search that found G:
 
 ```
 set DE_WORKERS=4            (Windows; use  export DE_WORKERS=4  elsewhere)
-python -u bloch_curved2.py 3 0 3000
+python -u bloch_slits.py 3 0 3000
 ```
 
 Arguments: number of free slit classes, random seed, maximum number of generations. Set the environment variables `OMP_NUM_THREADS`, `OPENBLAS_NUM_THREADS` and `MKL_NUM_THREADS` to 1 when using several workers. The search is stochastic and need not return the same domain; any domain it returns can be checked with steps 1 and 4 after adding its parameters to the `DESIGNS` table in `certify/inradius_certificate.py`.
 
-`bloch_evolve.py` and `bloch_evolve2.py` are the earlier searches over straight slits and slits with one bend.
+`earlier/bloch_evolve.py` and `earlier/bloch_evolve2.py` are the earlier searches over straight slits and slits with one bend; run them from inside `earlier/`.
 
 ## 7. Rebuilding the paper
 

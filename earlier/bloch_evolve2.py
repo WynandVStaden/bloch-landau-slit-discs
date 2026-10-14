@@ -6,6 +6,11 @@ symmetry axes and stay straight.
 
 Usage: python bloch_evolve2.py n_extra_classes [seed] [maxiter] [start values...]
 """
+import os as _os
+import sys as _sys
+
+_sys.path.append(_os.path.dirname(_os.path.dirname(_os.path.abspath(__file__))))  # shared modules in the parent folder
+
 import os
 import sys
 

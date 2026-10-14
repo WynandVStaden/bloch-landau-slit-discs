@@ -9,7 +9,7 @@ Usage: python designs.py
 """
 import numpy as np
 
-import bloch_curved2 as b
+import bloch_slits as b
 from bloch_solver import conformal_radius
 
 PROVED_2009 = 0.6563937  # Carroll and Ortega-Cerda, explicit formula

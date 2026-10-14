@@ -163,7 +163,7 @@ def rho_of(b):
 def make_density(geo, n):
     """Untrusted floating-point solve; returns odd Chebyshev coefficients per class as exact doubles."""
     sys.path.insert(0, "..")
-    import bloch_curved2 as bc
+    import bloch_slits as bc
     from bloch_residual import solve
 
     slits = [bc.Slit2(geo.fth[j], geo.fa[j], geo.fb1[j], geo.fb2[j]) for j in range(geo.n_slits)]

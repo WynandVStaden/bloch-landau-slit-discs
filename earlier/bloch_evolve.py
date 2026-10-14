@@ -2,6 +2,11 @@
 
 Usage: python bloch_evolve.py n_classes [seed] [maxiter]
 """
+import os as _os
+import sys as _sys
+
+_sys.path.append(_os.path.dirname(_os.path.dirname(_os.path.abspath(__file__))))  # shared modules in the parent folder
+
 import sys
 
 import numpy as np
