@@ -2,6 +2,8 @@
 
 > **Status:** the result and its computer-assisted proof have not yet been peer reviewed.
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23363553.svg)](https://doi.org/10.5281/zenodo.23363553)
+
 This repository contains a slit domain, a computer-assisted proof, and all the code behind the bound
 
 **U ≤ 0.65628589**
@@ -94,4 +96,4 @@ The domain, the numerical method, the programs, the proof and the documents in t
 - Code and data (`*.py`, `*.json`, `*.npz`, logs): [MIT licence](LICENSE).
 - Paper, documentation and figures: [CC BY 4.0](LICENSE-docs.md).
 
-If you use this work, please cite the paper.
+If you use this work, please cite the paper or the archived version: W. van Staden, *An improved upper bound for the univalent Bloch-Landau constant: slit domain, computer-assisted proof and paper*, version 1.0.1, Zenodo, 2026, [doi:10.5281/zenodo.23363553](https://doi.org/10.5281/zenodo.23363553).
