@@ -1,6 +1,7 @@
 # An improved upper bound for the univalent Bloch–Landau constant
 
 > **Preprint:** [Preprints.org, 20 October 2026](https://www.preprints.org/manuscript/202610.1936/v1) (DOI 10.20944/preprints202610.1936.v1).
+>
 > **Status:** the result and its computer-assisted proof have not yet been peer reviewed.
 
 This repository contains a slit domain, a computer-assisted proof, and all the code behind the bound
