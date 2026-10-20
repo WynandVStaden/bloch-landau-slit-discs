@@ -1,5 +1,6 @@
 # An improved upper bound for the univalent Bloch–Landau constant
 
+> **Preprint:** [Preprints.org, 20 October 2026](https://www.preprints.org/manuscript/202610.1936/v1) (DOI 10.20944/preprints202610.1936.v1).
 > **Status:** the result and its computer-assisted proof have not yet been peer reviewed.
 
 This repository contains a slit domain, a computer-assisted proof, and all the code behind the bound
@@ -94,4 +95,6 @@ The domain, the numerical method, the programs, the proof and the documents in t
 - Code and data (`*.py`, `*.json`, `*.npz`, logs): [MIT licence](LICENSE).
 - Paper, documentation and figures: [CC BY 4.0](LICENSE-docs.md).
 
-If you use this work, please cite the paper.
+If you use this work, please cite the paper:
+
+> W. van Staden, *An Improved Upper Bound for the Univalent Bloch-Landau Constant*, Preprints.org, 2026. https://www.preprints.org/manuscript/202610.1936/v1 (DOI 10.20944/preprints202610.1936.v1)

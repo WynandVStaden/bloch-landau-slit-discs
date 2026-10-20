@@ -17,3 +17,16 @@ keywords:
   - "conformal radius"
   - "computer-assisted proof"
   - "interval arithmetic"
+preferred-citation:
+  type: article
+  title: "An Improved Upper Bound for the Univalent Bloch-Landau Constant"
+  authors:
+    - family-names: "van Staden"
+      given-names: "Wynand"
+      orcid: "https://orcid.org/0009-0009-9884-8547"
+  year: 2026
+  month: 10
+  publisher:
+    name: "Preprints.org"
+  url: "https://www.preprints.org/manuscript/202610.1936/v1"
+  doi: "10.20944/preprints202610.1936.v1"
